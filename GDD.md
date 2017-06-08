@@ -5,8 +5,8 @@ Versão: 1.0
 ## Autores:
 - Adham Lucas - 
 - Edson Barros - edson.limajr@gmail.com
-- Tiago Aranha - tiagoweb@gmail.com
 - Roberta Cruz - 
+- Tiago Aranha - tiagoweb@gmail.com
 - Vitor Simões - vitor6427126@gmail.com
 - Wesley Rocha - wesleysr1997@gmail.com
 
