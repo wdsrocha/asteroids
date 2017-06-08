@@ -3,7 +3,7 @@
 Versão: 1.0
 
 ## Autores:
-- Adham Lucas - 
+- Adham Lucas - adhamlucas20@gmail.com
 - Edson Barros - edson.limajr@gmail.com
 - Roberta Cruz - 
 - Tiago Aranha - tiagoweb@gmail.com
