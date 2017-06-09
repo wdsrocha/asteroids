@@ -24,8 +24,8 @@ def cria_nave(posicao):
     nave_linha3 = pygame.draw.line(nave, WHITE, (3, 24), (21, 24), 1)
     tela.blit(nave, posicao)
 
-
 # Personagem: Asteroide
+# Função que cria asteroides de formatos diferentes aleatoriamente
 def cria_arteroide(posicao):
     arteroide = pygame.surface.Surface((90, 82))
 
