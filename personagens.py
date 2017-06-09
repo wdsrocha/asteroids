@@ -28,6 +28,7 @@ def cria_nave(posicao):
 # Personagem: Asteroide
 # Função que cria asteroides de formatos diferentes aleatoriamente
 def cria_arteroide(posicao):
+
     arteroide = pygame.surface.Surface((90, 84))
 
     pontos_asteroide_1 = (
