@@ -13,6 +13,7 @@ pygame.display.set_caption("Asteroids")
 
 tela.fill(BLACK)
 
+
 pygame.display.update()
 
 finaliza = False
