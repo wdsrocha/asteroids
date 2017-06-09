@@ -17,18 +17,17 @@ tela.fill(BLACK)
 
 
 # Personagem: Nave Espacial
-def cria_nave(posicao):
+def cria_nave():
     nave = pygame.surface.Surface((24, 34))
     nave_linha1 = pygame.draw.line(nave, WHITE, (0, 34), (12, 0), 1)
     nave_linha2 = pygame.draw.line(nave, WHITE, (24, 34), (12, 0), 1)
     nave_linha3 = pygame.draw.line(nave, WHITE, (3, 24), (21, 24), 1)
-    tela.blit(nave, posicao)
+    return nave
 
 
 # Personagem: Asteroide
 # Função que cria asteroides de formatos diferentes aleatoriamente
 def cria_arteroide(posicao):
-
     arteroide = pygame.surface.Surface((90, 84))
 
     pontos_asteroide_1 = (
@@ -48,8 +47,15 @@ def cria_arteroide(posicao):
     tela.blit(arteroide, posicao)
 
 
-cria_nave((200, 200))
+nave = cria_nave()
+
+nave = pygame.transform.rotate(nave, 300)
+tela.blit(nave, (30,30))
+
+
+cria_arteroide((400, 50))
 cria_arteroide((300, 300))
+cria_arteroide((400, 400))
 
 pygame.display.update()
 
