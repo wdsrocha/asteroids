@@ -14,23 +14,24 @@ def imprimir_texto(text, tamanho):
     texto = basicfont.render(text, True, WHITE)
     return texto
 
-def print_contadores(pontos, vidas, screen):
-    score = imprimir_texto(pontos, 25)
-    lifes = imprimir_texto((vidas+' x'), 35)
-    production = imprimir_texto('UEA - 2017', 15)
+def print_tela(pontos, vidas):
+    tela = pygame.display.set_mode((800, 600))
+    pygame.display.set_caption("Asteroids")
+    background = pygame.image.load('./assets/images/space.jpg').convert()
+    tela.blit(background, (0, 0))
+
+    score = imprimir_texto(str(pontos), 25)
+    lifes = imprimir_texto((str(vidas) + ' x'), 35)
+    production = imprimir_texto('Sistemas de Informação', 15)
+    university = imprimir_texto('UEA - 2017', 15)
 
     tela.blit(score, (50, 25))
     tela.blit(lifes, (60, 45))
-    tela.blit(production, (400, 570))
-    nave = personagens.cria_nave(screen, (125, 45))
-    tela.blit(nave,(125,45))
+    personagens.cria_nave(tela, (125, 45))
+    tela.blit(production, (350, 570))
+    tela.blit(university, (380,585))
 
 
-tela = (800, 600)
-
-tela = pygame.display.set_mode(tela)
-
-pygame.display.set_caption("Asteroids")
 
 clock = pygame.time.Clock()
 
@@ -38,12 +39,13 @@ finaliza = True
 
 while finaliza:
 
-    background = pygame.image.load('./assets/images/space.jpg').convert()
-    tela.blit(background, (0, 0))
+    pontos = 0
+    vidas = 3
+    print_tela(pontos, vidas)
 
-    print_contadores('0','3',tela)
+    taxa_frame = 60
+    clock.tick(taxa_frame)
 
-    taxa_frame = clock.tick(60)
     # --- Loop principal
     for event in pygame.event.get():
 
@@ -51,7 +53,6 @@ while finaliza:
             finaliza = False
 
     pygame.display.update()
-
 
 
 pygame.quit()
