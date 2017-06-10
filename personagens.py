@@ -1,26 +1,14 @@
 import pygame
-from pygame import *
-import random
 
-BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-
-pygame.init()
-
-tela = (800, 600)
-
-tela = pygame.display.set_mode(tela)
-
-pygame.display.set_caption("Asteroids - Personagens")
-
-tela.fill(BLACK)
+BLACK = (0, 0, 0)
 
 
 # Personagem: Nave Espacial
-def cria_nave(posicao):
+def cria_nave(tela, posicao):
     nave = pygame.surface.Surface((24, 34))
-    nave_linha1 = pygame.draw.line(nave, WHITE, (0, 34), (12, 0), 1)
-    nave_linha2 = pygame.draw.line(nave, WHITE, (24, 34), (12, 0), 1)
+    nave_linha1 = pygame.draw.line(nave, WHITE, (1, 34), (12, 1), 1)
+    nave_linha2 = pygame.draw.line(nave, WHITE, (24, 34), (12, 1), 1)
     nave_linha3 = pygame.draw.line(nave, WHITE, (3, 24), (21, 24), 1)
     tela.blit(nave, posicao)
     return nave
@@ -31,18 +19,9 @@ def girar_nave(nave, angulo):
     return True
 
 
-# função que faz a nave aparecer do outro lado da tela
-def nave_borda(sprite, x):
-    tela.blit(sprite, (x, 100))
-    x += 1
-    if x > 800:
-        x -= 800
-    pygame.display.update()
-
-
 # Personagem: Asteroide
 # Função que cria asteroides de formatos diferentes aleatoriamente
-def cria_arteroide(posicao):
+def cria_arteroide(tela, posicao):
     arteroide = pygame.surface.Surface((90, 84))
 
     pontos_asteroide_1 = (
@@ -64,7 +43,7 @@ def cria_arteroide(posicao):
 
 # função que cria o personagem patrulha
 
-def cria_patrulha(posicao, tamanho):
+def cria_patrulha(tela, posicao, tamanho):
     patrulha = pygame.surface.Surface((45, 27))
 
     contornos = (
@@ -75,28 +54,4 @@ def cria_patrulha(posicao, tamanho):
     pygame.draw.line(patrulha, WHITE, (12, 26), (32, 26), 1)
     pygame.draw.line(patrulha, WHITE, (1, 17), (43, 17), 1)
 
-
     tela.blit(patrulha, posicao)
-
-
-
-nave = cria_nave((200, 200))
-patrulha = cria_patrulha((150, 200),1)
-
-cria_arteroide((400, 50))
-cria_arteroide((300, 300))
-cria_arteroide((400, 400))
-
-pygame.display.update()
-
-finaliza = False
-
-while not finaliza:
-
-    # --- Loop principal
-    for event in pygame.event.get():
-
-        if event.type == pygame.QUIT:
-            finaliza = True
-
-pygame.quit()

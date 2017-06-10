@@ -1,6 +1,8 @@
 from pygame.math import Vector2 as Vector
+import personagens
 
-VELOCIDADE_MAXIMA = 2.5
+VELOCIDADE_MAXIMA = 2
+
 
 
 def aplica_forca(corpo, forca):
@@ -57,7 +59,10 @@ if __name__ == '__main__':
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
     ROTACAO = 90
-    nave_surface = pygame.image.load('./assets/images/jogador.png')
+    # nave_surface = pygame.image.load('./assets/images/jogador.png')
+
+    nave_surface = personagens.cria_nave(tela, (400,200))
+
     nave_surface = pygame.transform.rotozoom(nave_surface, -90, 1)
     nave = fisica.cria_corpo()
     while 1:
