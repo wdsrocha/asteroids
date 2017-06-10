@@ -64,7 +64,7 @@ def cria_arteroide(posicao):
 
 # função que cria o personagem patrulha
 
-def cria_patrulha(posicao):
+def cria_patrulha(posicao, tamanho):
     patrulha = pygame.surface.Surface((45, 27))
 
     contornos = (
@@ -75,11 +75,13 @@ def cria_patrulha(posicao):
     pygame.draw.line(patrulha, WHITE, (12, 26), (32, 26), 1)
     pygame.draw.line(patrulha, WHITE, (1, 17), (43, 17), 1)
 
+
     tela.blit(patrulha, posicao)
 
 
+
 nave = cria_nave((200, 200))
-patrulha = cria_patrulha((150, 200))
+patrulha = cria_patrulha((150, 200),1)
 
 cria_arteroide((400, 50))
 cria_arteroide((300, 300))
