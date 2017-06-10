@@ -9,7 +9,7 @@ BLUE = (0, 0, 255)
 
 pygame.init()
 
-def imprimir_texto(text, tamanho):
+def criar_texto(text, tamanho):
     basicfont = pygame.font.SysFont(None, tamanho)
     texto = basicfont.render(text, True, WHITE)
     return texto
@@ -20,10 +20,10 @@ def print_tela(pontos, vidas):
     background = pygame.image.load('./assets/images/space.jpg').convert()
     tela.blit(background, (0, 0))
 
-    score = imprimir_texto(str(pontos), 25)
-    lifes = imprimir_texto((str(vidas) + ' x'), 35)
-    production = imprimir_texto('Sistemas de Informação', 15)
-    university = imprimir_texto('UEA - 2017', 15)
+    score = criar_texto(str(pontos), 25)
+    lifes = criar_texto((str(vidas) + ' x'), 35)
+    production = criar_texto('Sistemas de Informação', 15)
+    university = criar_texto('UEA - 2017', 15)
 
     tela.blit(score, (50, 25))
     tela.blit(lifes, (60, 45))
