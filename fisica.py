@@ -1,6 +1,7 @@
 from pygame.math import Vector2 as Vector
 
-VELOCIDADE_MAXIMA = 3
+
+VELOCIDADE_MAXIMA = 2.5
 
 def aplica_forca(corpo, forca):
     corpo['aceleracao'] = forca/corpo['massa']
@@ -47,12 +48,12 @@ if __name__ == '__main__':
         clock.tick(60)
 
         forca = Vector(0, 0)
-#       keys = pygame.key.get_pressed()
-#       if keys[pygame.K_UP]:
-#           teta = math.radians(nave['angulo'])
-#           x = math.cos(teta)
-#           y = math.sin(teta)
-#           forca += Vector(x, -y)
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_UP]:
+            teta = math.radians(nave['angulo'])
+            x = math.cos(teta)
+            y = math.sin(teta)
+            forca += Vector(x, -y)
 #       if keys[pygame.K_LEFT]:
 #           nave['angulo'] += ROTACAO
 #           nave_surface = pygame.transform.rotozoom(nave_surface, ROTACAO, 1)
@@ -64,11 +65,6 @@ if __name__ == '__main__':
             if event.type == pygame.QUIT:
                 pygame.quit()
             keys = pygame.key.get_pressed()
-            if keys[pygame.K_UP]:
-                teta = math.radians(nave['angulo'])
-                x = math.cos(teta)
-                y = math.sin(teta)
-                forca += Vector(x, -y)
             if keys[pygame.K_LEFT]:
                 nave['angulo'] += ROTACAO
                 nave_surface = pygame.transform.rotozoom(nave_surface, ROTACAO, 1)
