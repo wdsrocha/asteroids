@@ -30,6 +30,8 @@ pygame.display.set_caption("Asteroids")
 
 tela.fill(BLACK)
 
+clock = pygame.time.Clock()
+
 score = imprimir_texto('0', 25)
 lifes = imprimir_texto('3 x', 35)
 production = imprimir_texto('UEA - 2017', 15)
@@ -38,9 +40,6 @@ tela.blit(score, (50, 25))
 tela.blit(lifes, (60, 45))
 tela.blit(production, (400, 570))
 nave = cria_nave((125, 45))
-
-
-pygame.display.update()
 
 finaliza = True
 
@@ -51,5 +50,9 @@ while finaliza:
 
         if event.type == pygame.QUIT:
             finaliza = False
+
+    pygame.display.update()
+
+    taxa_frame = clock.tick(70)
 
 pygame.quit()
