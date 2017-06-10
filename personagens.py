@@ -16,7 +16,11 @@ def cria_nave(tela, posicao):
 
 
 def turbina(tela, nave):
-    pygame.draw.polygon(nave, WHITE, ((8, 24), (12, 38), (16, 24)), 1)
+    turbina_nave = pygame.surface.Surface((24, 38))
+    pygame.draw.polygon(turbina_nave, WHITE, ((8, 24), (12, 38), (16, 24)), 1)
+    tela.blit(turbina_nave, (0, 0))
+    return turbina_nave
+
 
 # míssil
 def missil(tela):

@@ -1,5 +1,4 @@
 from pygame.math import Vector2 as Vector
-import personagens
 
 VELOCIDADE_MAXIMA = 1
 LARGURA = 800
@@ -50,19 +49,21 @@ def cria_corpo():
 
 
 if __name__ == '__main__':
-    import pygame, fisica, math
+    import pygame, fisica, math, personagens
 
     pygame.init()
     tela = pygame.display.set_mode((LARGURA, ALTURA))
     clock = pygame.time.Clock()
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
-    ROTACAO = 90
+    ROTACAO = 0
     # nave_surface = pygame.image.load('./assets/images/jogador.png')
 
     nave_surface = personagens.cria_nave(tela, (400, 200))
 
+
     nave_surface = pygame.transform.rotozoom(nave_surface, -90, 1)
+
     nave = fisica.cria_corpo()
 
     nave_pos = Vector(200, 150)
@@ -94,29 +95,22 @@ if __name__ == '__main__':
         if keys[pygame.K_RIGHT]:
             rotation_direction = -1.0
 
-        if keys[pygame.K_UP]:
-            teta = math.radians(nave_rotation)
-            x = math.cos(teta)
-            y = math.sin(teta)
-            forca += Vector(x, -y)
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                pygame.draw.polygon(nave_surface, WHITE, ((13, 17), (0, 13), (13, 9)), 1)
+                teta = math.radians(nave_rotation)
+                x = math.cos(teta)
+                y = math.sin(teta)
+                forca += Vector(x, -y)
 
-        rotated_sprit = pygame.transform.rotate(nave_surface, nave_rotation)
-        w, h = rotated_sprit.get_size()
-
-        sprite_draw_pos = Vector(nave_pos.x - w / 2, nave_pos.y - w / 2)
+        rotated_nave = pygame.transform.rotate(nave_surface, nave_rotation)
 
         time_based = clock.tick()
-        time_passed_seconds = time_based / 500.0
+        time_passed_seconds = time_based / 1000.0
 
         nave_rotation += rotation_direction * nave_rotation_speed * time_passed_seconds
 
-        heading_x = math.sin(rotation_direction * math.pi / 180.0)
-        heading_y = math.cos(rotation_direction * math.pi / 180.0)
-        heading = Vector(heading_x, heading_y)
-
-        nave_pos += heading * nave_speed * time_passed_seconds
-
         nave = aplica_forca(nave, forca)
         nave = atualiza(nave)
-        tela.blit(rotated_sprit, nave['posicao'])
+        tela.blit(rotated_nave, nave['posicao'])
         pygame.display.update()
