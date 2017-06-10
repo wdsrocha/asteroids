@@ -1,25 +1,24 @@
-import math
 from pygame.math import Vector2 as Vector
 
 VELOCIDADE_MAXIMA = 3
 
-def aplicaForca(corpo, forca):
+def aplica_forca(corpo, forca):
     corpo['aceleracao'] = forca/corpo['massa']
     return corpo
 
-def limitaVetor(u, lim):
+def limita_vetor(u, lim):
     if Vector.length(u) > lim**2:
         u = Vector.normalize(u)*lim
     return u
 
 def atualiza(corpo):
     corpo['velocidade'] += corpo['aceleracao']
-    corpo['velocidade'] = limitaVetor(corpo['velocidade'], VELOCIDADE_MAXIMA)
+    corpo['velocidade'] = limita_vetor(corpo['velocidade'], VELOCIDADE_MAXIMA)
     corpo['posicao'] += corpo['velocidade']
     corpo['aceleracao'] = 0
     return corpo
 
-def criaCorpo():
+def cria_corpo():
     '''Retorna um dicionário com as características de um corpo
     físico'''
     corpo = {}
@@ -31,7 +30,7 @@ def criaCorpo():
     return corpo
 
 if __name__ == '__main__':
-    import pygame, fisica
+    import pygame, fisica, math
     pygame.init()
     w = 800
     h = 400
@@ -42,7 +41,7 @@ if __name__ == '__main__':
     ROTACAO = 90
     nave_surface = pygame.image.load('./assets/images/jogador.png')
     nave_surface = pygame.transform.rotozoom(nave_surface, -90, 1)
-    nave = fisica.criaCorpo()
+    nave = fisica.cria_corpo()
     while 1:
         tela.fill((0, 0, 0))
         clock.tick(60)
@@ -77,7 +76,7 @@ if __name__ == '__main__':
                 nave['angulo'] -= ROTACAO
                 nave_surface = pygame.transform.rotozoom(nave_surface, -ROTACAO, 1)
         
-        nave = fisica.aplicaForca(nave, forca)
+        nave = fisica.aplica_forca(nave, forca)
         nave = fisica.atualiza(nave)
         tela.blit(nave_surface, nave['posicao'])
         pygame.display.update()
