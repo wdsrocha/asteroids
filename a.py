@@ -1,9 +1,7 @@
 from pygame.math import Vector2 as Vector
 import personagens
 
-VELOCIDADE_MAXIMA = 1
-LARGURA = 800
-ALTURA = 600
+VELOCIDADE_MAXIMA = 2
 
 
 def aplica_forca(corpo, forca):
@@ -21,15 +19,15 @@ def atualiza(corpo):
     corpo['velocidade'] += corpo['aceleracao']
     corpo['velocidade'] = limita_vetor(corpo['velocidade'], VELOCIDADE_MAXIMA)
 
-    if corpo['posicao'][0] > LARGURA:
+    if corpo['posicao'][0] > 800:
         corpo['posicao'][0] = 0
     if corpo['posicao'][0] < 0:
-        corpo['posicao'][0] = LARGURA
+        corpo['posicao'][0] = 800
 
-    if corpo['posicao'][1] > ALTURA:
+    if corpo['posicao'][1] > 400:
         corpo['posicao'][1] = 0
     if corpo['posicao'][1] < 0:
-        corpo['posicao'][1] = ALTURA
+        corpo['posicao'][1] = 400
 
     corpo['posicao'] += corpo['velocidade']
 
@@ -43,7 +41,7 @@ def cria_corpo():
     corpo = {}
     corpo['velocidade'] = Vector()
     corpo['aceleracao'] = Vector()
-    corpo['posicao'] = Vector(LARGURA / 2, ALTURA / 2)
+    corpo['posicao'] = Vector(400, 200)
     corpo['massa'] = 1
     corpo['angulo'] = 0
     return corpo
@@ -53,7 +51,9 @@ if __name__ == '__main__':
     import pygame, fisica, math
 
     pygame.init()
-    tela = pygame.display.set_mode((LARGURA, ALTURA))
+    w = 800
+    h = 400
+    tela = pygame.display.set_mode((w, h))
     clock = pygame.time.Clock()
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
@@ -67,7 +67,7 @@ if __name__ == '__main__':
 
     nave_pos = Vector(200, 150)
     nave_speed = 1000
-    nave_rotation = 90
+    nave_rotation = 0
     nave_rotation_speed = 10000  # Graus por segundo
 
     while 1:
@@ -90,7 +90,6 @@ if __name__ == '__main__':
 
         if keys[pygame.K_LEFT]:
             rotation_direction = +1.0
-
         if keys[pygame.K_RIGHT]:
             rotation_direction = -1.0
 
@@ -100,7 +99,7 @@ if __name__ == '__main__':
             y = math.sin(teta)
             forca += Vector(x, -y)
 
-        rotated_sprit = pygame.transform.rotate(nave_surface, nave_rotation)
+        rotated_sprit = pygame.transform.rotate(nave_surface, nave_rotation )
         w, h = rotated_sprit.get_size()
 
         sprite_draw_pos = Vector(nave_pos.x - w / 2, nave_pos.y - w / 2)
