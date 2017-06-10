@@ -53,6 +53,6 @@ while finaliza:
 
     pygame.display.update()
 
-    taxa_frame = clock.tick(70)
+    taxa_frame = clock.tick(24)
 
 pygame.quit()
