@@ -97,6 +97,7 @@ if __name__ == '__main__':
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
+                # falta fazer a turbina piscar e sumir quando solta o aceleraor
                 pygame.draw.polygon(nave_surface, WHITE, ((13, 17), (0, 13), (13, 9)), 1)
                 teta = math.radians(nave_rotation)
                 x = math.cos(teta)
