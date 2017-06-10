@@ -31,6 +31,15 @@ def girar_nave(nave, angulo):
     return True
 
 
+# função que faz a nave aparecer do outro lado da tela
+def nave_borda(sprite, x):
+    tela.blit(sprite, (x, 100))
+    x += 1
+    if x > 800:
+        x -= 800
+    pygame.display.update()
+
+
 # Personagem: Asteroide
 # Função que cria asteroides de formatos diferentes aleatoriamente
 def cria_arteroide(posicao):
@@ -53,7 +62,23 @@ def cria_arteroide(posicao):
     tela.blit(arteroide, posicao)
 
 
+# função que cria o personagem patrulha
+def cria_patrulha(posicao):
+    patrulha = pygame.surface.Surface((45, 27))
+
+    contornos = (
+        (16, 0), (28, 0), (33, 9), (43, 17), (32, 26), (12, 26), (1, 17), (11, 9))
+
+    pygame.draw.polygon(patrulha, WHITE, contornos, 1)
+    pygame.draw.line(patrulha, WHITE, (11, 9), (33, 9), 1)
+    pygame.draw.line(patrulha, WHITE, (12, 26), (32, 26), 1)
+    pygame.draw.line(patrulha, WHITE, (1, 17), (43, 17), 1)
+
+    tela.blit(patrulha, posicao)
+
+
 nave = cria_nave((200, 200))
+patrulha = cria_patrulha((150, 200))
 
 cria_arteroide((400, 50))
 cria_arteroide((300, 300))
