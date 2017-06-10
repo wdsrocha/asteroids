@@ -1,48 +1,36 @@
-import pygame
-from pygame import *
-import random
+import pygame, random
 
-BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-
-pygame.init()
-
-tela = (800, 600)
-
-tela = pygame.display.set_mode(tela)
-
-pygame.display.set_caption("Asteroids - Personagens")
-
-tela.fill(BLACK)
+BLACK = (0, 0, 0)
 
 
 # Personagem: Nave Espacial
-def cria_nave(posicao):
-    nave = pygame.surface.Surface((24, 34))
-    nave_linha1 = pygame.draw.line(nave, WHITE, (0, 34), (12, 0), 1)
-    nave_linha2 = pygame.draw.line(nave, WHITE, (24, 34), (12, 0), 1)
+def cria_nave(tela, posicao):
+    nave = pygame.surface.Surface((24, 38))
+    nave_linha1 = pygame.draw.line(nave, WHITE, (1, 34), (12, 1), 1)
+    nave_linha2 = pygame.draw.line(nave, WHITE, (24, 34), (12, 1), 1)
     nave_linha3 = pygame.draw.line(nave, WHITE, (3, 24), (21, 24), 1)
+
     tela.blit(nave, posicao)
     return nave
 
 
-# girar nave
-def girar_nave(nave, angulo):
+def turbina(tela, nave):
+    turbina_nave = pygame.surface.Surface((24, 38))
+    pygame.draw.polygon(turbina_nave, WHITE, ((8, 24), (12, 38), (16, 24)), 1)
+    tela.blit(turbina_nave, (0, 0))
+    return turbina_nave
+
+
+# míssil
+def missil(tela):
+    missil = pygame.draw.circle(tela, WHITE, (50, 50), 2, 1)
     return True
-
-
-# função que faz a nave aparecer do outro lado da tela
-def nave_borda(sprite, x):
-    tela.blit(sprite, (x, 100))
-    x += 1
-    if x > 800:
-        x -= 800
-    pygame.display.update()
 
 
 # Personagem: Asteroide
 # Função que cria asteroides de formatos diferentes aleatoriamente
-def cria_arteroide(posicao):
+def cria_arteroide(tela, posicao):
     arteroide = pygame.surface.Surface((90, 84))
 
     pontos_asteroide_1 = (
@@ -64,7 +52,7 @@ def cria_arteroide(posicao):
 
 # função que cria o personagem patrulha
 
-def cria_patrulha(posicao):
+def cria_patrulha(tela, posicao, tamanho):
     patrulha = pygame.surface.Surface((45, 27))
 
     contornos = (
@@ -76,25 +64,3 @@ def cria_patrulha(posicao):
     pygame.draw.line(patrulha, WHITE, (1, 17), (43, 17), 1)
 
     tela.blit(patrulha, posicao)
-
-
-nave = cria_nave((200, 200))
-patrulha = cria_patrulha((150, 200))
-
-cria_arteroide((400, 50))
-cria_arteroide((300, 300))
-cria_arteroide((400, 400))
-
-pygame.display.update()
-
-finaliza = False
-
-while not finaliza:
-
-    # --- Loop principal
-    for event in pygame.event.get():
-
-        if event.type == pygame.QUIT:
-            finaliza = True
-
-pygame.quit()

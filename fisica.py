@@ -1,23 +1,40 @@
 from pygame.math import Vector2 as Vector
 
+VELOCIDADE_MAXIMA = 1
+LARGURA = 800
+ALTURA = 600
 
-VELOCIDADE_MAXIMA = 2.5
 
 def aplica_forca(corpo, forca):
-    corpo['aceleracao'] = forca/corpo['massa']
+    corpo['aceleracao'] = forca / corpo['massa']
     return corpo
 
+
 def limita_vetor(u, lim):
-    if Vector.length(u) > lim**2:
-        u = Vector.normalize(u)*lim
+    if Vector.length(u) > lim ** 2:
+        u = Vector.normalize(u) * lim
     return u
+
 
 def atualiza(corpo):
     corpo['velocidade'] += corpo['aceleracao']
     corpo['velocidade'] = limita_vetor(corpo['velocidade'], VELOCIDADE_MAXIMA)
+
+    if corpo['posicao'][0] > LARGURA:
+        corpo['posicao'][0] = 0
+    if corpo['posicao'][0] < 0:
+        corpo['posicao'][0] = LARGURA
+
+    if corpo['posicao'][1] > ALTURA:
+        corpo['posicao'][1] = 0
+    if corpo['posicao'][1] < 0:
+        corpo['posicao'][1] = ALTURA
+
     corpo['posicao'] += corpo['velocidade']
+
     corpo['aceleracao'] = 0
     return corpo
+
 
 def cria_corpo():
     '''Retorna um dicionário com as características de um corpo
@@ -25,54 +42,76 @@ def cria_corpo():
     corpo = {}
     corpo['velocidade'] = Vector()
     corpo['aceleracao'] = Vector()
-    corpo['posicao'] = Vector()
+    corpo['posicao'] = Vector(LARGURA / 2, ALTURA / 2)
     corpo['massa'] = 1
     corpo['angulo'] = 0
     return corpo
 
+
 if __name__ == '__main__':
-    import pygame, fisica, math
+    import pygame, fisica, math, personagens
+
     pygame.init()
-    w = 800
-    h = 400
-    tela = pygame.display.set_mode((w, h))
+    tela = pygame.display.set_mode((LARGURA, ALTURA))
     clock = pygame.time.Clock()
     WHITE = (255, 255, 255)
-    BLACK = (0, 0, 0) 
-    ROTACAO = 90
-    nave_surface = pygame.image.load('./assets/images/jogador.png')
+    BLACK = (0, 0, 0)
+    ROTACAO = 0
+    # nave_surface = pygame.image.load('./assets/images/jogador.png')
+
+    nave_surface = personagens.cria_nave(tela, (400, 200))
+
+
     nave_surface = pygame.transform.rotozoom(nave_surface, -90, 1)
+
     nave = fisica.cria_corpo()
+
+    nave_pos = Vector(200, 150)
+    nave_speed = 1000
+    nave_rotation = 90
+    nave_rotation_speed = 10000  # Graus por segundo
+
     while 1:
-        tela.fill((0, 0, 0))
+
+        background = pygame.image.load('./assets/images/space.jpg').convert()
+        tela.blit(background, (0, 0))
+
         clock.tick(60)
 
         forca = Vector(0, 0)
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_UP]:
-            teta = math.radians(nave['angulo'])
-            x = math.cos(teta)
-            y = math.sin(teta)
-            forca += Vector(x, -y)
-#       if keys[pygame.K_LEFT]:
-#           nave['angulo'] += ROTACAO
-#           nave_surface = pygame.transform.rotozoom(nave_surface, ROTACAO, 1)
-#       if keys[pygame.K_RIGHT]:
-#           nave['angulo'] -= ROTACAO
-#           nave_surface = pygame.transform.rotozoom(nave_surface, -ROTACAO, 1)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_LEFT]:
-                nave['angulo'] += ROTACAO
-                nave_surface = pygame.transform.rotozoom(nave_surface, ROTACAO, 1)
-            if keys[pygame.K_RIGHT]:
-                nave['angulo'] -= ROTACAO
-                nave_surface = pygame.transform.rotozoom(nave_surface, -ROTACAO, 1)
-        
-        nave = fisica.aplica_forca(nave, forca)
-        nave = fisica.atualiza(nave)
-        tela.blit(nave_surface, nave['posicao'])
+                exit()
+
+        keys = pygame.key.get_pressed()
+
+        rotation_direction = 0.
+
+        if keys[pygame.K_LEFT]:
+            rotation_direction = +1.0
+
+        if keys[pygame.K_RIGHT]:
+            rotation_direction = -1.0
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                # falta fazer a turbina piscar e sumir quando solta o aceleraor
+                pygame.draw.polygon(nave_surface, WHITE, ((13, 17), (0, 13), (13, 9)), 1)
+                teta = math.radians(nave_rotation)
+                x = math.cos(teta)
+                y = math.sin(teta)
+                forca += Vector(x, -y)
+
+        rotated_nave = pygame.transform.rotate(nave_surface, nave_rotation)
+
+        time_based = clock.tick()
+        time_passed_seconds = time_based / 1000.0
+
+        nave_rotation += rotation_direction * nave_rotation_speed * time_passed_seconds
+
+        nave = aplica_forca(nave, forca)
+        nave = atualiza(nave)
+        tela.blit(rotated_nave, nave['posicao'])
         pygame.display.update()
