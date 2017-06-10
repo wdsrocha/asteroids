@@ -1,4 +1,4 @@
-import pygame
+import pygame, random
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -6,16 +6,21 @@ BLACK = (0, 0, 0)
 
 # Personagem: Nave Espacial
 def cria_nave(tela, posicao):
-    nave = pygame.surface.Surface((24, 34))
+    nave = pygame.surface.Surface((24, 38))
     nave_linha1 = pygame.draw.line(nave, WHITE, (1, 34), (12, 1), 1)
     nave_linha2 = pygame.draw.line(nave, WHITE, (24, 34), (12, 1), 1)
     nave_linha3 = pygame.draw.line(nave, WHITE, (3, 24), (21, 24), 1)
+
     tela.blit(nave, posicao)
     return nave
 
 
-# girar nave
-def girar_nave(nave, angulo):
+def turbina(tela, nave):
+    pygame.draw.polygon(nave, WHITE, ((8, 24), (12, 38), (16, 24)), 1)
+
+# míssil
+def missil(tela):
+    missil = pygame.draw.circle(tela, WHITE, (50, 50), 2, 1)
     return True
 
 
