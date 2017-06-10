@@ -63,6 +63,7 @@ def cria_arteroide(posicao):
 
 
 # função que cria o personagem patrulha
+
 def cria_patrulha(posicao):
     patrulha = pygame.surface.Surface((45, 27))
 
