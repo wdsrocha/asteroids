@@ -6,7 +6,7 @@ ALTURA = 600
 
 
 def aplica_forca(corpo, forca):
-    corpo['aceleracao'] = forca / corpo['massa']
+    corpo['aceleracao'] += forca / corpo['massa']
     return corpo
 
 
@@ -32,7 +32,7 @@ def atualiza(corpo):
 
     corpo['posicao'] += corpo['velocidade']
 
-    corpo['aceleracao'] = 0
+    corpo['aceleracao'] = Vector(0, 0)
     return corpo
 
 
