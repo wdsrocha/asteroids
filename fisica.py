@@ -1,8 +1,14 @@
 from pygame.math import Vector2 as Vector
 
-VELOCIDADE_MAXIMA = 1
+VELOCIDADE_MAXIMA = 3
 LARGURA = 800
 ALTURA = 600
+
+def aplica_atrito(corpo, coeficiente_de_atrito):
+    if corpo['velocidade'] == Vector(0, 0):
+        return corpo
+    atrito = -coeficiente_de_atrito*Vector.normalize(corpo['velocidade'])
+    return aplica_forca(corpo, atrito)
 
 
 def aplica_forca(corpo, forca):
@@ -39,8 +45,8 @@ def atualiza(corpo):
 def cria_corpo():
     '''Retorna um dicionário com as características de um corpo físico'''
     corpo = {}
-    corpo['velocidade'] = Vector()
-    corpo['aceleracao'] = Vector()
+    corpo['velocidade'] = Vector(0, 0)
+    corpo['aceleracao'] = Vector(0, 0)
     corpo['posicao'] = Vector(LARGURA / 2, ALTURA / 2)
     corpo['massa'] = 1
     corpo['angulo'] = 0
@@ -115,5 +121,6 @@ if __name__ == '__main__':
 
         nave = aplica_forca(nave, forca)
         nave = atualiza(nave)
+        nave = aplica_atrito(nave, 0.15)
         tela.blit(rotated_nave, nave['posicao'])
         pygame.display.update()
