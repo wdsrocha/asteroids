@@ -1,5 +1,5 @@
 from pygame.math import Vector2 as Vector
-import random
+
 VELOCIDADE_MAXIMA = 1
 LARGURA = 800
 ALTURA = 600
@@ -48,7 +48,7 @@ def cria_corpo():
 
 
 if __name__ == '__main__':
-    import pygame, fisica, math, personagens
+    import pygame, fisica, math, personagens, random
 
     pygame.init()
     tela = pygame.display.set_mode((LARGURA, ALTURA))
@@ -94,7 +94,7 @@ if __name__ == '__main__':
             rotation_direction = -1.0
 
         if keys[pygame.K_LSHIFT]:
-            nave['posicao']=random.randint(0,800),random.randint(0,600)
+            nave['posicao'] = random.randint(0,LARGURA), random.randint(0, ALTURA)
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
