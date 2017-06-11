@@ -1,5 +1,5 @@
 from pygame.math import Vector2 as Vector
-
+import random
 VELOCIDADE_MAXIMA = 1
 LARGURA = 800
 ALTURA = 600
@@ -37,8 +37,7 @@ def atualiza(corpo):
 
 
 def cria_corpo():
-    '''Retorna um dicionário com as características de um corpo
-    físico'''
+    '''Retorna um dicionário com as características de um corpo físico'''
     corpo = {}
     corpo['velocidade'] = Vector()
     corpo['aceleracao'] = Vector()
@@ -60,7 +59,6 @@ if __name__ == '__main__':
     # nave_surface = pygame.image.load('./assets/images/jogador.png')
 
     nave_surface = personagens.cria_nave(tela, (400, 200))
-
 
     nave_surface = pygame.transform.rotozoom(nave_surface, -90, 1)
 
@@ -94,6 +92,9 @@ if __name__ == '__main__':
 
         if keys[pygame.K_RIGHT]:
             rotation_direction = -1.0
+
+        if keys[pygame.K_LSHIFT]:
+            nave['posicao']=random.randint(0,800),random.randint(0,600)
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
