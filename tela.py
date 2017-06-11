@@ -1,4 +1,4 @@
-import pygame
+import pygame, personagens
 from pygame import *
 
 BLACK = (0, 0, 0)
@@ -9,41 +9,42 @@ BLUE = (0, 0, 255)
 
 pygame.init()
 
-def imprimir_texto(text, tamanho):
+def criar_texto(text, tamanho):
     basicfont = pygame.font.SysFont(None, tamanho)
     texto = basicfont.render(text, True, WHITE)
     return texto
 
-def cria_nave(posicao):
-    nave = pygame.surface.Surface((24, 34))
-    nave_linha1 = pygame.draw.line(nave, WHITE, (0, 34), (12, 0), 1)
-    nave_linha2 = pygame.draw.line(nave, WHITE, (24, 34), (12, 0), 1)
-    nave_linha3 = pygame.draw.line(nave, WHITE, (3, 24), (21, 24), 1)
-    tela.blit(nave, posicao)
-    return nave
+def print_tela(pontos, vidas):
+    tela = pygame.display.set_mode((800, 600))
+    pygame.display.set_caption("Asteroids")
+    background = pygame.image.load('./assets/images/space.jpg').convert()
+    tela.blit(background, (0, 0))
 
-tela = (800, 600)
+    score = criar_texto(str(pontos), 25)
+    lifes = criar_texto((str(vidas) + ' x'), 35)
+    production = criar_texto('Sistemas de Informação', 15)
+    university = criar_texto('UEA - 2017', 15)
 
-tela = pygame.display.set_mode(tela)
+    tela.blit(score, (50, 25))
+    tela.blit(lifes, (60, 45))
+    personagens.cria_nave(tela, (125, 45))
+    tela.blit(production, (350, 570))
+    tela.blit(university, (380,585))
 
-pygame.display.set_caption("Asteroids")
 
-tela.fill(BLACK)
 
 clock = pygame.time.Clock()
-
-score = imprimir_texto('0', 25)
-lifes = imprimir_texto('3 x', 35)
-production = imprimir_texto('UEA - 2017', 15)
-
-tela.blit(score, (50, 25))
-tela.blit(lifes, (60, 45))
-tela.blit(production, (400, 570))
-nave = cria_nave((125, 45))
 
 finaliza = True
 
 while finaliza:
+
+    pontos = 0
+    vidas = 3
+    print_tela(pontos, vidas)
+
+    taxa_frame = 60
+    clock.tick(taxa_frame)
 
     # --- Loop principal
     for event in pygame.event.get():
@@ -53,6 +54,5 @@ while finaliza:
 
     pygame.display.update()
 
-    taxa_frame = clock.tick(24)
 
 pygame.quit()
