@@ -1,4 +1,5 @@
 from pygame.math import Vector2 as Vector
+import math
 
 VELOCIDADE_MAXIMA = 3
 

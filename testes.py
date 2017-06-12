@@ -66,13 +66,16 @@ if __name__ == '__main__':
         if keys[pygame.K_LSHIFT]:
             nave['posicao'] = random.randint(0,LARGURA), random.randint(0, ALTURA)
 
+        if keys[pygame.K_UP]:
+            forca += fisica.cria_vetor_unitario(math.radians(nave_rotation))
+
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 pygame.draw.polygon(nave_surface, WHITE, ((13, 17), (0, 13), (13, 9)), 1)
-                teta = math.radians(nave_rotation)
-                x = math.cos(teta)
-                y = math.sin(teta)
-                forca += Vector(x, -y)
+#               teta = math.radians(nave_rotation)
+#               x = math.cos(teta)
+#               y = math.sin(teta)
+#               forca += Vector(x, -y)
         else:
             pygame.draw.polygon(nave_surface, BLACK, ((13, 17), (0, 13), (13, 9)), 1)
 
