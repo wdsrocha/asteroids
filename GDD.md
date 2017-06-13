@@ -28,9 +28,11 @@ O jogo em questão é um clone do jogo Asteroids. Este é um jogo de arcade com 
 
 ## Controles
     
-    1. Movimentação da nave no espaço: A nave pode ser controlada pelo acelarador (tecla UP) que direciona a nave para frente e aumenta a acelaração quando a tecla permance acionada e diminui a aceleração até parar quando a tecla deixa de ser pressionada. A nave também pode girar em seu próprio eixo com a utilização das teclas seta para direita e seta para esquerda, o que fará com que a nave, caso esteja em movimento tenha sua direção modificada de acordo com a telca pressionada (direita ou esqureda)
-    2. Hyperespaço: A nave pode viajar para o hyperespaço e surgir instantaneamente em qualquer ponto do espaço ao ser acionada a tecla shift do lado esquerdo do teclado.
-    3. A nave atira misseis caso a tecla barra de espaços seja acionada. Caso a tecla se mantenha acionada, a nave atira sequencialmente misseis até que a tecla deixe de ser pressionada.
+1. Movimentação da nave no espaço: A nave pode ser controlada pelo acelarador (tecla UP) que direciona a nave para frente e aumenta a acelaração quando a tecla permance acionada e diminui a aceleração até parar quando a tecla deixa de ser pressionada. A nave também pode girar em seu próprio eixo com a utilização das teclas seta para direita e seta para esquerda, o que fará com que a nave, caso esteja em movimento tenha sua direção modificada de acordo com a telca pressionada (direita ou esqureda)
+
+2. Hyperespaço: A nave pode viajar para o hyperespaço e surgir instantaneamente em qualquer ponto do espaço ao ser acionada a tecla shift do lado esquerdo do teclado.
+
+3. A nave atira misseis caso a tecla barra de espaços seja acionada. Caso a tecla se mantenha acionada, a nave atira sequencialmente misseis até que a tecla deixe de ser pressionada.
 
 ## Câmera
 
