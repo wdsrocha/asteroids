@@ -72,10 +72,10 @@ if __name__ == '__main__':
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 pygame.draw.polygon(nave_surface, WHITE, ((13, 17), (0, 13), (13, 9)), 1)
-#               teta = math.radians(nave_rotation)
-#               x = math.cos(teta)
-#               y = math.sin(teta)
-#               forca += Vector(x, -y)
+                # teta = math.radians(nave_rotation)
+                # x = math.cos(teta)
+                # y = math.sin(teta)
+                # forca += Vector(x, -y)
         else:
             pygame.draw.polygon(nave_surface, BLACK, ((13, 17), (0, 13), (13, 9)), 1)
 
@@ -86,8 +86,10 @@ if __name__ == '__main__':
 
         nave_rotation += rotation_direction * nave_rotation_speed * time_passed_seconds
 
+
         nave = fisica.aplica_forca(nave, forca)
         nave = fisica.atualiza_corpo(nave)
         nave = fisica.aplica_atrito(nave, 0.15)
+
         tela.blit(rotated_nave, nave['posicao'])
         pygame.display.update()
