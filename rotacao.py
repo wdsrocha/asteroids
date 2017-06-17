@@ -1,6 +1,5 @@
 from sys import exit
 from asteroids.vector2 import Vector2
-from asteroids import nave
 
 if __name__ == '__main__':
     import pygame, math, random
@@ -37,10 +36,12 @@ if __name__ == '__main__':
         tempo_passado = clock.tick()
         tempo_passado_segundos = tempo_passado / 1000.0
 
+        rotation_direction = 0.0
+
         # retornar uma tecla pressionada
         teclas_precionadas = pygame.key.get_pressed()
 
-        rotation_direction = 0.
+
 
         if teclas_precionadas[pygame.K_LEFT]:
             rotation_direction = +1.0
