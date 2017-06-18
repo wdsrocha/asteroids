@@ -18,7 +18,7 @@ def corrige_posicao(corpo):
 
 
 if __name__ == '__main__':
-    import pygame, fisica, math, personagens, random
+    import pygame, fisica, math, personagens, random, screen
 
     pygame.init()
     tela = pygame.display.set_mode((LARGURA, ALTURA))
@@ -39,10 +39,11 @@ if __name__ == '__main__':
     nave_rotation = 90
     nave_rotation_speed = 10000  # Graus por segundo
 
+    pontos = 0
+    vidas = 3
     while 1:
 
-        background = pygame.image.load('./assets/images/space.jpg').convert()
-        tela.blit(background, (0, 0))
+        screen.print_background(tela)
 
         clock.tick(60)
 
@@ -92,4 +93,6 @@ if __name__ == '__main__':
         nave = fisica.aplica_atrito(nave, 0.15)
 
         tela.blit(rotated_nave, nave['posicao'])
+        screen.print_tabela(pontos, vidas, tela)
+
         pygame.display.update()
