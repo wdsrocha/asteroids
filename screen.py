@@ -14,12 +14,13 @@ def criar_texto(text, tamanho):
     texto = basicfont.render(text, True, WHITE)
     return texto
 
-def print_tela(pontos, vidas):
-    tela = pygame.display.set_mode((800, 600))
+def print_background(tela):
     pygame.display.set_caption("Asteroids")
-    background = pygame.image.load('./assets/images/space.jpg').convert()
+    background_file = '/home/adhamlucas/asteroids/assets/images/space.jpg'
+    background = pygame.image.load(background_file).convert()
     tela.blit(background, (0, 0))
 
+def print_tabela(pontos,vidas,tela):
     score = criar_texto(str(pontos), 25)
     lifes = criar_texto((str(vidas) + ' x'), 35)
     production = criar_texto('Sistemas de Informação', 15)
@@ -30,29 +31,3 @@ def print_tela(pontos, vidas):
     personagens.cria_nave(tela, (125, 45))
     tela.blit(production, (350, 570))
     tela.blit(university, (380,585))
-
-
-
-clock = pygame.time.Clock()
-
-finaliza = True
-
-while finaliza:
-
-    pontos = 0
-    vidas = 3
-    print_tela(pontos, vidas)
-
-    taxa_frame = 60
-    clock.tick(taxa_frame)
-
-    # --- Loop principal
-    for event in pygame.event.get():
-
-        if event.type == pygame.QUIT:
-            finaliza = False
-
-    pygame.display.update()
-
-
-pygame.quit()

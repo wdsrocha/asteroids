@@ -18,7 +18,7 @@ def corrige_posicao(corpo):
 
 
 if __name__ == '__main__':
-    import pygame, fisica, math, personagens, random
+    import pygame, fisica, math, personagens, random, screen
 
     pygame.init()
     tela = pygame.display.set_mode((LARGURA, ALTURA))
@@ -27,6 +27,7 @@ if __name__ == '__main__':
     BLACK = (0, 0, 0)
     ROTACAO = 0
     # nave_surface = pygame.image.load('./assets/images/jogador.png')
+
 
     nave_surface = personagens.cria_nave(tela, (400, 200))
 
@@ -39,10 +40,11 @@ if __name__ == '__main__':
     nave_rotation = 90
     nave_rotation_speed = 10000  # Graus por segundo
 
-    while 1:
+    pontos = 0
+    vidas = 3
 
-        background = pygame.image.load('./assets/images/space.jpg').convert()
-        tela.blit(background, (0, 0))
+    while 1:
+        screen.print_background(tela)
 
         clock.tick(60)
 
@@ -55,7 +57,10 @@ if __name__ == '__main__':
 
         keys = pygame.key.get_pressed()
 
-        rotation_direction = 0.
+        rotation_direction = 0
+
+        if keys[pygame.K_LSHIFT]:
+            nave['posicao'] = random.randint(0,LARGURA), random.randint(0, ALTURA)
 
         if keys[pygame.K_LEFT]:
             rotation_direction = +1.0
@@ -63,19 +68,16 @@ if __name__ == '__main__':
         if keys[pygame.K_RIGHT]:
             rotation_direction = -1.0
 
-        if keys[pygame.K_LSHIFT]:
-            nave['posicao'] = random.randint(0,LARGURA), random.randint(0, ALTURA)
-
         if keys[pygame.K_UP]:
             forca += fisica.cria_vetor_unitario(math.radians(nave_rotation))
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 pygame.draw.polygon(nave_surface, WHITE, ((13, 17), (0, 13), (13, 9)), 1)
-#               teta = math.radians(nave_rotation)
-#               x = math.cos(teta)
-#               y = math.sin(teta)
-#               forca += Vector(x, -y)
+                teta = math.radians(nave_rotation)
+                x = math.cos(teta)
+                y = math.sin(teta)
+                forca += Vector(x, -y)
         else:
             pygame.draw.polygon(nave_surface, BLACK, ((13, 17), (0, 13), (13, 9)), 1)
 
@@ -90,4 +92,6 @@ if __name__ == '__main__':
         nave = fisica.atualiza_corpo(nave)
         nave = fisica.aplica_atrito(nave, 0.15)
         tela.blit(rotated_nave, nave['posicao'])
+        screen.print_tabela(pontos,vidas,tela)
+
         pygame.display.update()
