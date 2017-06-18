@@ -49,4 +49,4 @@ O jogo em questão é um clone do jogo Asteroids. Este é um jogo de arcade com 
 
 ## Interface
 
-    Fundo preto representando o espaço sideral. No topo à esquerda a pontuação e logo abaixo a quantidade de vidas.
+    Fundo preto representando o espaço sideral. No topo à esquerda a pontuação e logo abaixo a quantidade de vidas. As personagens serão desenhadas com figuras geométricas vetoriais.
