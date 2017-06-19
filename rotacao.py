@@ -1,5 +1,5 @@
 from sys import exit
-from asteroids.vector2 import Vector2
+from pygame.math import Vector2
 
 if __name__ == '__main__':
     import pygame, math, random

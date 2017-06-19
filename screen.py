@@ -16,7 +16,7 @@ def criar_texto(text, tamanho):
 
 def print_background(tela):
     pygame.display.set_caption("Asteroids")
-    background_file = '/home/adhamlucas/asteroids/assets/images/space.jpg'
+    background_file = 'assets/images/space.jpg'
     background = pygame.image.load(background_file).convert()
     tela.blit(background, (0, 0))
 
