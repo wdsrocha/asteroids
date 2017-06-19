@@ -8,7 +8,7 @@ def tiro_nave():
     pygame.mixer.music.play()
 
 def turbina_nave():
-    pygame.mixer.music.load('assets/sounds/beat1.wav')
+    pygame.mixer.music.load('assets/sounds/thrust.wav')
     pygame.mixer.music.play()
 
 def tiro_patrulha_grande():
