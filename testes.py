@@ -10,15 +10,15 @@ def corrige_posicao(corpo):
         corpo['posicao'].x = LARGURA
 
     if corpo['posicao'].y > ALTURA:
-        corpo['posicao'].y = 0
+        corpo['posicao'].y = 0 - corpo['posicao'].y
     if corpo['posicao'].y < 0:
-        corpo['posicao'].y = ALTURA
+        corpo['posicao'].y = ALTURA - corpo['posicao'].y
 
     return corpo
 
 
 if __name__ == '__main__':
-    import pygame, fisica, math, personagens, random, screen
+    import pygame, fisica, math, personagens, random, screen, sounds
 
     pygame.init()
     tela = pygame.display.set_mode((LARGURA, ALTURA))
@@ -73,6 +73,7 @@ if __name__ == '__main__':
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 pygame.draw.polygon(nave_surface, WHITE, ((13, 17), (0, 13), (13, 9)), 1)
+                sounds.turbina_nave()
                 # teta = math.radians(nave_rotation)
                 # x = math.cos(teta)
                 # y = math.sin(teta)
@@ -91,7 +92,7 @@ if __name__ == '__main__':
         nave = fisica.aplica_forca(nave, forca)
         nave = fisica.atualiza_corpo(nave)
         nave = fisica.aplica_atrito(nave, 0.15)
-
+        corrige_posicao(nave)
         tela.blit(rotated_nave, nave['posicao'])
         screen.print_tabela(pontos, vidas, tela)
 
