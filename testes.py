@@ -20,6 +20,7 @@ def corrige_posicao(corpo):
 if __name__ == '__main__':
     import pygame, fisica, math, personagens, random, screen, sounds
 
+
     pygame.init()
     tela = pygame.display.set_mode((LARGURA, ALTURA))
     clock = pygame.time.Clock()
@@ -41,6 +42,9 @@ if __name__ == '__main__':
 
     pontos = 0
     vidas = 3
+
+
+
     while 1:
 
         screen.print_background(tela)
