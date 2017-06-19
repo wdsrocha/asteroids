@@ -10,9 +10,9 @@ def corrige_posicao(corpo):
         corpo['posicao'].x = LARGURA
 
     if corpo['posicao'].y > ALTURA:
-        corpo['posicao'].y = 0 - corpo['posicao'].y
+        corpo['posicao'].y = 0
     if corpo['posicao'].y < 0:
-        corpo['posicao'].y = ALTURA - corpo['posicao'].y
+        corpo['posicao'].y = ALTURA
 
     return corpo
 
