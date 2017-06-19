@@ -70,6 +70,9 @@ if __name__ == '__main__':
         if keys[pygame.K_UP]:
             forca += fisica.cria_vetor_unitario(math.radians(nave_rotation))
 
+        if keys[pygame.K_SPACE]:
+            sounds.tiro_nave()
+
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 pygame.draw.polygon(nave_surface, WHITE, ((13, 17), (0, 13), (13, 9)), 1)
