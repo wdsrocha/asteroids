@@ -21,11 +21,11 @@ def turbina(tela, nave):
     return turbina_nave
 
 
-# míssil
-def missil(tela):
-    missil = pygame.surface.Surface((2, 2), pygame.SRCALPHA, 32).convert_alpha()
-    pygame.draw.circle(missil, WHITE, (200,300), 10, 0)
-    return missil
+# projétil/míssil 
+def cria_projetil(tela):
+    cria_projetil = pygame.surface.Surface((2, 2), pygame.SRCALPHA, 32).convert_alpha()
+    pygame.draw.circle(cria_projetil, WHITE, (200,300), 10, 0)
+    return cria_projetil
 
 
 # Personagem: Asteroide
