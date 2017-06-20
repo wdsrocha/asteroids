@@ -47,8 +47,6 @@ if __name__ == '__main__':
 
         screen.print_background(tela)
 
-        clock.tick(60)
-
         forca = Vector(0, 0)
 
         for event in pygame.event.get():
@@ -83,9 +81,6 @@ if __name__ == '__main__':
             print(nave['posicao'])
             print(nave)
 
-
-
-
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 pygame.draw.polygon(nave_surface, WHITE, ((13, 17), (0, 13), (13, 9)), 1)
@@ -97,18 +92,19 @@ if __name__ == '__main__':
         else:
             pygame.draw.polygon(nave_surface, BLACK, ((13, 17), (0, 13), (13, 9)), 1)
 
-        rotated_nave = pygame.transform.rotate(nave_surface, nave_rotation)
-
         time_based = clock.tick()
-        time_passed_seconds = time_based / 20.0
+        time_passed_seconds = time_based / 1000.0
 
+        rotated_nave = pygame.transform.rotate(nave_surface, nave_rotation)
+        w, h = rotated_nave.get_size()
+        sprite_draw_pos = Vector(nave['posicao'].x - w / 2, nave['posicao'].y - h / 2)
         nave_rotation += rotation_direction * nave_rotation_speed * time_passed_seconds
 
         nave = fisica.aplica_forca(nave, forca)
         nave = fisica.atualiza_corpo(nave)
         nave = fisica.aplica_atrito(nave, 0.1)
         corrige_posicao(nave)
-        tela.blit(rotated_nave, nave['posicao'])
+        tela.blit(rotated_nave, (sprite_draw_pos.x, sprite_draw_pos.y))
         screen.print_tabela(pontos, vidas, tela)
 
         pygame.display.update()

@@ -34,6 +34,7 @@ if __name__ == '__main__':
                 exit()
         # limitador para nao passar de 30 interacoes por segundo
         tempo_passado = clock.tick()
+        print(tempo_passado)
         tempo_passado_segundos = tempo_passado / 1000.0
 
         rotation_direction = 0.0
