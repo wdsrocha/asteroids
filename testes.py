@@ -51,7 +51,7 @@ if __name__ == '__main__':
         if keys[pygame.K_UP]:
             forca += fisica.cria_vetor_unitario(math.radians(nave_rotation))
             # faz o foguete aparecer
-            pygame.draw.polygon(nave_surface, WHITE, ((13, 17), (0, 13), (13, 9)), 1)
+            personagens.cria_turbina(tela, nave_surface)
             sounds.turbina_nave()
         else:
             pygame.draw.polygon(nave_surface, BLACK, ((13, 17), (0, 13), (13, 9)), 1)

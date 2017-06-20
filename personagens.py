@@ -14,10 +14,8 @@ def cria_nave(tela, posicao):
     return nave
 
 
-def turbina(tela, nave):
-    turbina_nave = pygame.surface.Surface((24, 38), pygame.SRCALPHA, 32).convert_alpha()
-    pygame.draw.polygon(turbina_nave, WHITE, ((8, 24), (12, 38), (16, 24)), 1)
-    tela.blit(turbina_nave, (0, 0))
+def cria_turbina(tela, nave_surface):
+    turbina_nave = pygame.draw.polygon(nave_surface, WHITE, ((13, 17), (0, 13), (13, 9)), 1)
     return turbina_nave
 
 
