@@ -17,7 +17,10 @@ def score_counter(cgrande,cmedia,cpeq,cnave,cpatrulhagrande,cpatrulhapq):
         score+= 1000
 
     return score
+
+
 def print_score(score):
     pygame.font.init()
     font = pygame.font.get_default_font()
     font_score = pygame.font.SysFont(font, 30)
+    text = font_score.render("Score",score, 1, (255,255,255))
