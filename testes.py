@@ -45,7 +45,10 @@ if __name__ == '__main__':
 
     while 1:
 
+
         screen.print_background(tela)
+
+
 
         forca = Vector(0, 0)
 
@@ -72,14 +75,7 @@ if __name__ == '__main__':
 
         if keys[pygame.K_SPACE]:
             sounds.tiro_nave()
-            missil = personagens.missil(tela)
 
-            for i in range(50):
-                tela.blit(missil, (int(nave['posicao'].x - i), int(nave['posicao'].y - i)))
-                pygame.display.update()
-
-            print(nave['posicao'])
-            print(nave)
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
