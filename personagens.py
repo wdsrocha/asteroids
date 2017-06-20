@@ -7,10 +7,9 @@ BLACK = (0, 0, 0)
 # Personagem: Nave Espacial
 def cria_nave(tela, posicao):
     nave = pygame.surface.Surface((24, 38), pygame.SRCALPHA, 32).convert_alpha()
-    nave_linha1 = pygame.draw.line(nave, WHITE, (1, 34), (12, 1), 1)
-    nave_linha2 = pygame.draw.line(nave, WHITE, (24, 34), (12, 1), 1)
-    nave_linha3 = pygame.draw.line(nave, WHITE, (3, 24), (21, 24), 1)
-
+    pygame.draw.line(nave, WHITE, (1, 34), (12, 1), 1)
+    pygame.draw.line(nave, WHITE, (24, 34), (12, 1), 1)
+    pygame.draw.line(nave, WHITE, (3, 24), (21, 24), 1)
     tela.blit(nave, posicao)
     return nave
 
@@ -23,9 +22,9 @@ def turbina(tela, nave):
 
 
 # míssil
-def missil(tela):
-    missil = pygame.draw.circle(tela, WHITE, (50, 50), 2, 1)
-    return True
+def missil(tela, pos_inicial):
+    missil = pygame.draw.circle(tela, WHITE, (pos_inicial), 2, 0)
+    return missil
 
 
 # Personagem: Asteroide

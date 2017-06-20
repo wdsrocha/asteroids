@@ -3,6 +3,7 @@ from pygame.math import Vector2 as Vector
 LARGURA = 800
 ALTURA = 600
 
+
 def corrige_posicao(corpo):
     if corpo['posicao'].x > LARGURA:
         corpo['posicao'].x = 0
@@ -20,7 +21,6 @@ def corrige_posicao(corpo):
 if __name__ == '__main__':
     import pygame, fisica, math, personagens, random, screen, sounds
 
-
     pygame.init()
     tela = pygame.display.set_mode((LARGURA, ALTURA))
     clock = pygame.time.Clock()
@@ -33,17 +33,14 @@ if __name__ == '__main__':
 
     nave_surface = pygame.transform.rotozoom(nave_surface, -90, 1)
 
-    nave = fisica.cria_corpo(LARGURA/2, ALTURA/2)
+    nave = fisica.cria_corpo(LARGURA / 2, ALTURA / 2)
 
     nave_pos = Vector(200, 150)
-    nave_speed = 1000
     nave_rotation = 90
-    nave_rotation_speed = 10000  # Graus por segundo
+    nave_rotation_speed = 360  # Graus por segundo
 
     pontos = 0
     vidas = 3
-
-
 
     while 1:
 
@@ -69,13 +66,16 @@ if __name__ == '__main__':
             rotation_direction = -1.0
 
         if keys[pygame.K_LSHIFT]:
-            nave['posicao'] = random.randint(0,LARGURA), random.randint(0, ALTURA)
+            nave['posicao'] = random.randint(0, LARGURA), random.randint(0, ALTURA)
 
         if keys[pygame.K_UP]:
             forca += fisica.cria_vetor_unitario(math.radians(nave_rotation))
 
         if keys[pygame.K_SPACE]:
             sounds.tiro_nave()
+            personagens.missil(tela, (int(nave['posicao'].x), int(nave['posicao'].y)))
+            # print(nave['posicao'])
+            # print(nave['direcao'])
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
@@ -91,14 +91,13 @@ if __name__ == '__main__':
         rotated_nave = pygame.transform.rotate(nave_surface, nave_rotation)
 
         time_based = clock.tick()
-        time_passed_seconds = time_based / 1000.0
+        time_passed_seconds = time_based / 20.0
 
         nave_rotation += rotation_direction * nave_rotation_speed * time_passed_seconds
 
-
         nave = fisica.aplica_forca(nave, forca)
         nave = fisica.atualiza_corpo(nave)
-        nave = fisica.aplica_atrito(nave, 0.15)
+        nave = fisica.aplica_atrito(nave, 0.1)
         corrige_posicao(nave)
         tela.blit(rotated_nave, nave['posicao'])
         screen.print_tabela(pontos, vidas, tela)
