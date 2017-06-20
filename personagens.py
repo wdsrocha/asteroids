@@ -22,12 +22,10 @@ def turbina(tela, nave):
 
 
 # míssil
-def missil(tela, pos_inicial):
-    missil = pygame.draw.circle(tela, WHITE, (pos_inicial), 2, 0)
-    return missil
+def missil(tela):
+    pygame.draw.circle(missil, WHITE, (0,0), 2, 0)
+    return missil  # Personagem: Asteroide
 
-
-# Personagem: Asteroide
 # Função que cria asteroides de formatos diferentes aleatoriamente
 def cria_arteroide(tela, posicao):
     arteroide = pygame.surface.Surface((90, 84), pygame.SRCALPHA, 32).convert_alpha()

@@ -35,12 +35,13 @@ if __name__ == '__main__':
 
     nave = fisica.cria_corpo(LARGURA / 2, ALTURA / 2)
 
-    nave_pos = Vector(200, 150)
     nave_rotation = 90
     nave_rotation_speed = 360  # Graus por segundo
 
     pontos = 0
     vidas = 3
+
+    shotspeed = 1
 
     while 1:
 
@@ -73,9 +74,17 @@ if __name__ == '__main__':
 
         if keys[pygame.K_SPACE]:
             sounds.tiro_nave()
-            personagens.missil(tela, (int(nave['posicao'].x), int(nave['posicao'].y)))
-            # print(nave['posicao'])
-            # print(nave['direcao'])
+            missil = personagens.missil(tela)
+
+            for i in range(50):
+                tela.blit(missil, (int(nave['posicao'].x - i), int(nave['posicao'].y - i)))
+                pygame.display.update()
+
+            print(nave['posicao'])
+            print(nave)
+
+
+
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
