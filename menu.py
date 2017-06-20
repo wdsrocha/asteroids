@@ -21,6 +21,12 @@ def creditos():
     menu_fonte_creditos = pygame.font.Font("assets/fonts/hyperspace/hyperspace_bold.otf", 13)
     menu_creditos = menu_fonte_creditos.render("Pai Games Inc", True, (WHITE))
 
+def score():
+    menu_fonte_creditos = pygame.font.Font("assets/fonts/hyperspace/hyperspace_bold.otf", 13)
+    menu_creditos = menu_fonte_creditos.render("Pai Games Inc", True, (WHITE))
+
+
+
 def menu_game(tela,screen):
     menu_ativo = True
 
@@ -43,10 +49,11 @@ def menu_game(tela,screen):
                 pygame.quit()
                 exit()
 
-            # posição do mouse e clique do botão
-            pos = pygame.mouse.get_pos()
-            (pressed1, pressed2, pressed3) = pygame.mouse.get_pressed()
-            # if
-            if botao_play_game.collidepoint(pos) & pressed1 == 1:
-                screen.print_background(tela)
-                menu_ativo = False
+        # posição do mouse e clique do botão
+        pos = pygame.mouse.get_pos()
+        (pressed1, pressed2, pressed3) = pygame.mouse.get_pressed()
+        # if
+        if botao_play_game.collidepoint(pos) & pressed1 == 1:
+            screen.print_background(tela)
+            pygame.display.update()
+            menu_ativo = False

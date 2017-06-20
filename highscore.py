@@ -21,6 +21,3 @@ def ver_highscore():
     for linha in cursor.fetchall():
         scores.append(linha)
     return scores
-
-grava_pontos('Joesley', 50000)
-print(ver_highscore())

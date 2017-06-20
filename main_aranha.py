@@ -11,8 +11,6 @@ if __name__ == '__main__':
     ROTACAO = 0
     # nave_surface = pygame.image.load('./assets/images/jogador.png')
 
-    # asteroid_surface=personagens.cria_asteroide(tela,)
-
     nave_surface = personagens.cria_nave(tela, (400, 200))
 
     nave_surface = pygame.transform.rotozoom(nave_surface, -90, 1)
@@ -28,18 +26,20 @@ if __name__ == '__main__':
     shotspeed = 1
 
     screen.print_background(tela)
-    pygame.display.update()
-    menu.menu_game(tela,screen)
+
+    menu.menu_game(tela, screen)
+
+    print(highscore.ver_highscore())
 
     while 1:
 
         screen.print_background(tela)
+
         forca = Vector(0, 0)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                highscore.grava_pontos('Vitor', pontos)
-                print(highscore.ver_highscore())
+                highscore.grava_pontos('Adham', pontos)
                 pygame.quit()
                 exit()
 
@@ -53,19 +53,30 @@ if __name__ == '__main__':
         if keys[pygame.K_RIGHT]:
             rotation_direction = -1.0
 
+        if keys[pygame.K_LSHIFT]:
+            nave['posicao'] = random.randint(0, screen.dimensoes[0]), random.randint(0, screen.dimensoes[1])
+
         if keys[pygame.K_UP]:
             forca += fisica.cria_vetor_unitario(math.radians(nave_rotation))
-            # faz o foguete aparecer
-            personagens.cria_turbina(tela, nave_surface)
-            sounds.turbina_nave()
-        else:
-            pygame.draw.polygon(nave_surface, BLACK, ((13, 17), (0, 13), (13, 9)), 1)
 
         if keys[pygame.K_SPACE]:
             sounds.tiro_nave()
             pontos += 1
             if pontos % 100 == 0:
                 vidas += 1
+
+            print(nave_rotation)
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                pygame.draw.polygon(nave_surface, WHITE, ((13, 17), (0, 13), (13, 9)), 1)
+                sounds.turbina_nave()
+                # teta = math.radians(nave_rotation)
+                # x = math.cos(teta)
+                # y = math.sin(teta)
+                # forca += Vector(x, -y)
+        else:
+            pygame.draw.polygon(nave_surface, BLACK, ((13, 17), (0, 13), (13, 9)), 1)
 
         time_based = clock.tick()
         time_passed_seconds = time_based / 1000.0

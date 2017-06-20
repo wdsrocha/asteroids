@@ -49,6 +49,8 @@ def cria_arteroide(tela, posicao):
     tela.blit(arteroide, posicao)
 
 
+
+
 # função que cria o personagem patrulha
 
 def cria_patrulha(tela, posicao, tamanho):
