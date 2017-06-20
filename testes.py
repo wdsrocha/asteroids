@@ -75,7 +75,9 @@ if __name__ == '__main__':
 
         if keys[pygame.K_SPACE]:
             sounds.tiro_nave()
-
+            pontos += 1
+            if pontos % 100 == 0:
+                vidas += 1
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
