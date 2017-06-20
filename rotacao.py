@@ -7,6 +7,7 @@ if __name__ == '__main__':
     # prepara para podermos usar o pygame
     pygame.init()
 
+
     # cria uma tela 640x480
     tela = pygame.display.set_mode((640, 480), 0, 32)
 

@@ -1,28 +1,10 @@
 from pygame.math import Vector2 as Vector
 
-LARGURA = 800
-ALTURA = 600
-
-
-def corrige_posicao(corpo):
-    if corpo['posicao'].x > LARGURA:
-        corpo['posicao'].x = 0
-    if corpo['posicao'].x < 0:
-        corpo['posicao'].x = LARGURA
-
-    if corpo['posicao'].y > ALTURA:
-        corpo['posicao'].y = 0
-    if corpo['posicao'].y < 0:
-        corpo['posicao'].y = ALTURA
-
-    return corpo
-
-
 if __name__ == '__main__':
     import pygame, fisica, math, personagens, random, screen, sounds
 
     pygame.init()
-    tela = pygame.display.set_mode((LARGURA, ALTURA))
+    tela = pygame.display.set_mode((screen.dimensoes[0], screen.dimensoes[1]))
     clock = pygame.time.Clock()
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
@@ -33,7 +15,7 @@ if __name__ == '__main__':
 
     nave_surface = pygame.transform.rotozoom(nave_surface, -90, 1)
 
-    nave = fisica.cria_corpo(LARGURA / 2, ALTURA / 2)
+    nave = fisica.cria_corpo(screen.dimensoes[0] / 2, screen.dimensoes[1] / 2)
 
     nave_rotation = 90
     nave_rotation_speed = 360  # Graus por segundo
@@ -45,10 +27,7 @@ if __name__ == '__main__':
 
     while 1:
 
-
         screen.print_background(tela)
-
-
 
         forca = Vector(0, 0)
 
@@ -68,7 +47,7 @@ if __name__ == '__main__':
             rotation_direction = -1.0
 
         if keys[pygame.K_LSHIFT]:
-            nave['posicao'] = random.randint(0, LARGURA), random.randint(0, ALTURA)
+            nave['posicao'] = random.randint(0, screen.dimensoes[0]), random.randint(0, screen.dimensoes[1])
 
         if keys[pygame.K_UP]:
             forca += fisica.cria_vetor_unitario(math.radians(nave_rotation))
@@ -101,7 +80,7 @@ if __name__ == '__main__':
         nave = fisica.aplica_forca(nave, forca)
         nave = fisica.atualiza_corpo(nave)
         nave = fisica.aplica_atrito(nave, 0.1)
-        corrige_posicao(nave)
+        screen.corrige_posicao(nave)
         tela.blit(rotated_nave, (sprite_draw_pos.x, sprite_draw_pos.y))
         screen.print_tabela(pontos, vidas, tela)
 
