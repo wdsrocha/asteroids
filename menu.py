@@ -165,7 +165,7 @@ def game_over(tela, screen, pontos):
                                          (screen.dimensoes[0] / 2 - texto_botao_salvar.get_width() // 2, 440))
 
             if botao_salvar.collidepoint(pos) and (event.type == pygame.MOUSEBUTTONUP):
-                # highscore.grava_pontos(inp, pontos)
+                highscore.grava_pontos(inp, pontos)
                 screen.print_background(tela)
                 scores = True
                 titulo_highscores = escreve_texto("HIGH SCORES", 40)
