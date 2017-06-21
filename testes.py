@@ -1,21 +1,22 @@
 from pygame.math import Vector2 as Vector
 
 if __name__ == '__main__':
-    import pygame, fisica, math, personagens, random, screen, sounds, menu, highscore
+    import pygame, fisica, math, personagens, random, screen, sounds, menu, highscore, asteroid
 
     pygame.init()
     tela = pygame.display.set_mode((screen.dimensoes[0], screen.dimensoes[1]))
     clock = pygame.time.Clock()
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
-    ROTACAO = 0
-    # nave_surface = pygame.image.load('./assets/images/jogador.png')
 
-    # asteroid_surface=personagens.cria_asteroide(tela,)
+    passos_asteroide = 90
+    asteroides = []
 
     nave_surface = personagens.cria_nave(tela, (400, 200))
 
     nave_surface = pygame.transform.rotozoom(nave_surface, -90, 1)
+
+    asteroide = asteroid.cria_arteroide(tela, (100, 100))
 
     nave = fisica.cria_corpo(screen.dimensoes[0] / 2, screen.dimensoes[1] / 2)
 
@@ -29,7 +30,7 @@ if __name__ == '__main__':
 
     screen.print_background(tela)
     pygame.display.update()
-    menu.menu_game(tela,screen)
+    menu.menu_game(tela, screen)
 
     while 1:
 
@@ -70,6 +71,21 @@ if __name__ == '__main__':
         time_based = clock.tick()
         time_passed_seconds = time_based / 1000.0
 
+        # asteroid
+        if not passos_asteroide:
+            passos_asteroide = 90
+            asteroides.append(asteroid.cria_arteroide(tela, (100, 100)))
+            # asteroides.append(asteroid.cria_arteroide(tela, (screen.dimensoes[0], screen.dimensoes[1])))
+            print('foi criado')
+        else:
+            passos_asteroide -= 1
+
+        for i in range(len(asteroides)):
+            asteroides[i] = asteroid.atualiza_asteroide(asteroides[i])
+            tela.blit(asteroides[i]['surface'], asteroides[i]['corpo']['posicao'])
+
+        # asteroid.atualiza_asteroide()
+
         rotated_nave = pygame.transform.rotate(nave_surface, nave_rotation)
         w, h = rotated_nave.get_size()
         sprite_draw_pos = Vector(nave['posicao'].x - w / 2, nave['posicao'].y - h / 2)
@@ -83,3 +99,4 @@ if __name__ == '__main__':
         screen.print_tabela(pontos, vidas, tela)
 
         pygame.display.update()
+        asteroid.remove_asteroide_usados()
