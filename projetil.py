@@ -1,4 +1,4 @@
-import pygame, fisica, personagens, testes
+import pygame, fisica, personagens, testes, screen
 
 def cria_projetil(posicao, direcao):
     projetil = {}
@@ -23,4 +23,5 @@ def atualiza_projetil(projetil):
 
 
 def mostra_projetil(projetil, tela):
+    screen.corrige_posicao(projetil['corpo'],projetil['surface'])
     tela.blit(projetil['surface'], projetil['corpo']['posicao'])

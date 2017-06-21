@@ -5,8 +5,8 @@ BLACK = (0, 0, 0)
 
 # tamanhos: 0 - grande, 1 - medio, 2 - pequeno
 def cria_asteroide(posicao, tamanho):
-    massa_por_tamanho = [3.0, 2.0, 1.0]
-    dimensao = [(90,84), (45, 42), (15, 14)]
+    massa_por_tamanho = [3.0, 1.0, 0.5]
+    dimensao = [(90,84), (45, 42), (22, 21)]
     asteroide = {}
     asteroide['tamanho'] = tamanho
 
@@ -30,7 +30,7 @@ def cria_asteroide(posicao, tamanho):
     asteroides = [pontos_asteroide_1, pontos_asteroide_2, pontos_asteroide_3]
     asteroide_escolhido = asteroides[random.randint(0, 2)]
     pygame.draw.polygon(
-        asteroide['surface'], WHITE, asteroide_escolhido, 1)
+        asteroide['surface'], WHITE, asteroide_escolhido, 3)
     asteroide['surface'] = pygame.transform.scale(
         asteroide['surface'], dimensao[tamanho])
 
