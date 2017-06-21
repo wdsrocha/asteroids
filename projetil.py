@@ -8,7 +8,7 @@ def cria_projetil(posicao, direcao):
     forca = fisica.cria_vetor_unitario(direcao)
     projetil['corpo'] = fisica.aplica_forca(projetil['corpo'], forca)
 
-    projetil['surface'] = pygame.surface.Surface((2, 2), pygame.SRCALPHA, 32).convert_alpha()
+    projetil['surface'] = pygame.surface.Surface((3, 3), pygame.SRCALPHA, 32).convert_alpha()
     pygame.draw.circle(projetil['surface'], (255,255,255), (0,0), 10, 10)
 
     return projetil

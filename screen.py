@@ -48,5 +48,3 @@ def corrige_posicao(corpo):
         corpo['posicao'].y = 0
     if corpo['posicao'].y < 0:
         corpo['posicao'].y = dimensoes[1]
-
-    return corpo
