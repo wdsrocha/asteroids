@@ -1,4 +1,5 @@
-import pygame, highscore
+import pygame, highscore, testes
+from pygame.locals import *
 
 WHITE = (255, 255, 255)
 
@@ -13,9 +14,9 @@ def titulo_jogo(tela):
 
 
 def titulo_game_over(tela):
-    menu_fonte_titulo = pygame.font.Font("assets/fonts/bitdust1.ttf", 100)
+    menu_fonte_titulo = pygame.font.Font("assets/fonts/bitdust1.ttf", 60)
     menu_titulo = menu_fonte_titulo.render("G A M E   O V E R", True, (WHITE))
-    menu_titulo = tela.blit(menu_titulo, (400 - menu_titulo.get_width() // 2, 300 - menu_titulo.get_height() // 2))
+    menu_titulo = tela.blit(menu_titulo, (400 - menu_titulo.get_width() // 2, 200 - menu_titulo.get_height() // 2))
     return menu_titulo
 
 
@@ -66,8 +67,6 @@ def abre_tela_inicial(tela, screen):
     return (botao_play_game, botao_high_scores, menu_opcoes, botao_high_scores_voltar)
 
 
-
-
 def menu_game(tela, screen):
     menu_ativo = True
 
@@ -111,12 +110,26 @@ def menu_game(tela, screen):
             pygame.display.update()
             menu_ativo = False
 
-def game_over(tela, screen):
+
+def game_over(tela, screen, pontos):
     menu_ativo = True
 
     titulo_game_over(tela)
+    texto_botao_voltar = escreve_texto('NEW GAME', 28)
+    botao_voltar = tela.blit(escreve_texto('NEW GAME', 28),
+                             (screen.dimensoes[0] / 2 - texto_botao_voltar.get_width() // 2, 540))
+    pygame.display.update()
+
+    inp = ""
+    fonte_texto_nome = pygame.font.Font("assets/fonts/bitdust1.ttf", 30)
+
+    keys = pygame.key.get_pressed()
 
     while menu_ativo:
+
+        # posição do mouse e clique do botão
+        pos = pygame.mouse.get_pos()
+        (pressed1, pressed2, pressed3) = pygame.mouse.get_pressed()
 
         for event in pygame.event.get():
 
@@ -124,17 +137,28 @@ def game_over(tela, screen):
                 pygame.quit()
                 exit()
 
-        # posição do mouse e clique do botão
-        pos = pygame.mouse.get_pos()
-        (pressed1, pressed2, pressed3) = pygame.mouse.get_pressed()
-        # if
+            if event.type == pygame.KEYDOWN:
+                inp += event.unicode
 
-        texto_botao_voltar = escreve_texto('NEW GAME', 28)
 
-        botao_voltar = tela.blit(escreve_texto('NEW GAME', 28),
-                                 (screen.dimensoes[0] / 2 - texto_botao_voltar.get_width() // 2, 540))
+            # if
+
+            txt = fonte_texto_nome.render(inp, True, (WHITE))
+            digite_seu_nome = escreve_texto('Digite seu nome:'.upper(), 40)
+            tela.blit(digite_seu_nome, (screen.dimensoes[0] / 2 - digite_seu_nome.get_width() // 2, 280))
+            tela.blit(txt, (300, 350))
+            pygame.display.update()
+
+            if inp != "":
+                texto_botao_salvar = escreve_texto('SALVAR', 28)
+
+                botao_salvar = tela.blit(texto_botao_salvar,
+                                         (screen.dimensoes[0] / 2 - texto_botao_salvar.get_width() // 2, 440))
+
+
+                if botao_salvar.collidepoint(pos) and (event.type == pygame.MOUSEBUTTONUP):
+                    highscore.grava_pontos(inp, pontos)
+
 
         if botao_voltar.collidepoint(pos) & pressed1 == 1:
-            print("Tela Inicial")
-            screen.print_background(tela)
-            abre_tela_inicial(tela, screen)
+            testes
