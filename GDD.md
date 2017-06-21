@@ -21,11 +21,9 @@ O jogo em questão é um clone do jogo Asteroids. Este é um jogo de arcade com 
 ## Personagens
 
     1. Nave Espacial
-    2. Patrulha (Disco voador) Maior
-    3. Patrulha (Disco voador) Menor
-    4. Asteroide Grande
-    5. Asteroide Médio
-    6. Asteroide Pequeno
+    2. Asteroide Grande
+    3. Asteroide Médio
+    4. Asteroide Pequeno
 
 ## Controles
     
