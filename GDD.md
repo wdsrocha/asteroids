@@ -41,11 +41,9 @@ O jogo em questão é um clone do jogo Asteroids. Este é um jogo de arcade com 
     
 ## Inimigos
 
-    1. Patrulha (Disco voador) Maior
-    2. Patrulha (Disco voador) Menor
-    3. Asteroide Grande
-    4. Asteroide Médio
-    5. Asteroide Pequeno
+    1. Asteroide Grande
+    2. Asteroide Médio
+    3. Asteroide Pequeno
 
 
 ## Interface
