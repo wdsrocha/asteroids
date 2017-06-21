@@ -38,7 +38,6 @@ def escreve_texto(texto, tamanho):
     texto_score = texto_score.render(texto, True, (WHITE))
     return texto_score
 
-
 def imprime_highscores(tela, screen):
     scores = highscore.ver_highscore()
     if len(scores) > 10:
@@ -75,7 +74,7 @@ def imprime_creditos(tela, screen):
 
 def abre_tela_inicial(tela, screen):
     menu_opcoes = (escreve_texto("PLAY GAME", 28), escreve_texto("HIGH SCORES", 28), escreve_texto('NEW GAME', 28),
-                   escreve_texto('CRÉDITOS', 30))
+                   escreve_texto('CRÉDITOS', 28))
 
     botao_high_scores_voltar = tela.blit(escreve_texto('NEW GAME', 28),
                                          (screen.dimensoes[0] / 2 - menu_opcoes[2].get_width() // 2 + 20, 540))
