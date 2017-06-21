@@ -51,7 +51,6 @@ if __name__ == '__main__':
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     projeteis.append(projetil.cria_projetil(nave['posicao'], math.radians(nave_rotation)))
-                    tela.blit(projeteis[-1]['surface'], (200, 200))
                     sounds.tiro_nave()
                     pontos += 1
                     if pontos % 100 == 0:
@@ -74,14 +73,6 @@ if __name__ == '__main__':
             sounds.turbina_nave()
         else:
             pygame.draw.polygon(nave_surface, BLACK, ((13, 17), (0, 13), (13, 9)), 1)
-
-        # if keys[pygame.K_SPACE]:
-        #     projeteis.append(projetil.cria_projetil(nave['posicao'], math.radians(nave_rotation)))
-        #     tela.blit(projeteis[-1]['surface'], (200, 200))
-        #     sounds.tiro_nave()
-        #     pontos += 1
-        #     if pontos % 100 == 0:
-        #         vidas += 1
 
         time_based = clock.tick()
         time_passed_seconds = time_based / 1000.0
