@@ -45,7 +45,7 @@ def imprime_highscores(tela, screen):
         texto = str(scores[i][1]) + "          " + str(scores[i][2])
         score = escreve_texto(texto.upper(), 26)
         tela.blit(score,
-                  (screen.dimensoes[0] / 2 - score.get_width() // 2, 140 + 30 * i))
+                  (screen.dimensoes[0] / 2 - score.get_width() // 2, 160 + 30 * i))
 
 
 def abre_tela_inicial(tela, screen):
@@ -114,7 +114,14 @@ def menu_game(tela, screen):
 def game_over(tela, screen, pontos):
     menu_ativo = True
 
+    texto_botao_salvar = escreve_texto('SALVAR', 28)
+    botao_salvar = tela.blit(texto_botao_salvar,
+                             (screen.dimensoes[0] / 2 - texto_botao_salvar.get_width() // 2, 440))
+    screen.print_background(tela)
+    pygame.display.update()
+
     titulo_game_over(tela)
+
     texto_botao_voltar = escreve_texto('NEW GAME', 28)
     botao_voltar = tela.blit(escreve_texto('NEW GAME', 28),
                              (screen.dimensoes[0] / 2 - texto_botao_voltar.get_width() // 2, 540))
@@ -123,7 +130,12 @@ def game_over(tela, screen, pontos):
     inp = ""
     fonte_texto_nome = pygame.font.Font("assets/fonts/bitdust1.ttf", 30)
 
-    keys = pygame.key.get_pressed()
+    digite_seu_nome = escreve_texto('Digite seu nome:'.upper(), 40)
+    tela.blit(digite_seu_nome, (screen.dimensoes[0] / 2 - digite_seu_nome.get_width() // 2, 280))
+
+    pygame.display.update()
+
+    scores = False
 
     while menu_ativo:
 
@@ -140,25 +152,33 @@ def game_over(tela, screen, pontos):
             if event.type == pygame.KEYDOWN:
                 inp += event.unicode
 
-
             # if
 
             txt = fonte_texto_nome.render(inp, True, (WHITE))
-            digite_seu_nome = escreve_texto('Digite seu nome:'.upper(), 40)
-            tela.blit(digite_seu_nome, (screen.dimensoes[0] / 2 - digite_seu_nome.get_width() // 2, 280))
-            tela.blit(txt, (300, 350))
-            pygame.display.update()
 
-            if inp != "":
+            if inp != "" and not scores:
+                tela.blit(txt, (300, 350))
+                pygame.display.update()
+
                 texto_botao_salvar = escreve_texto('SALVAR', 28)
-
                 botao_salvar = tela.blit(texto_botao_salvar,
                                          (screen.dimensoes[0] / 2 - texto_botao_salvar.get_width() // 2, 440))
 
+            if botao_salvar.collidepoint(pos) and (event.type == pygame.MOUSEBUTTONUP):
+                highscore.grava_pontos(inp, pontos)
+                screen.print_background(tela)
+                scores = True
+                titulo_highscores = escreve_texto("HIGH SCORES", 40)
+                tela.blit(titulo_highscores,
+                          (screen.dimensoes[0] / 2 - titulo_highscores.get_width() // 2, 80))
+                imprime_highscores(tela, screen)
 
-                if botao_salvar.collidepoint(pos) and (event.type == pygame.MOUSEBUTTONUP):
-                    highscore.grava_pontos(inp, pontos)
+                texto_botao_voltar = escreve_texto('NEW GAME', 28)
 
+                botao_voltar = tela.blit(escreve_texto('NEW GAME', 28),
+                                         (screen.dimensoes[0] / 2 - texto_botao_voltar.get_width() // 2, 540))
+
+                pygame.display.update()
 
         if botao_voltar.collidepoint(pos) & pressed1 == 1:
             testes
