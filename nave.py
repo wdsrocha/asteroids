@@ -24,10 +24,7 @@ def cria_nave(posicao):
 def atualiza_nave(nave, direcao, tempo_passado):
     fisica.atualiza_corpo(nave['corpo'])
     fisica.aplica_atrito(nave['corpo'], 0.1)
-
     nave['corpo']['direcao'] += direcao*VELOCIDADE_DE_ROTACAO*tempo_passado
-
-    return nave
 
 
 def mostra_nave(nave, tela):
@@ -45,4 +42,3 @@ def ativa_propulsao(nave):
     angulo = math.radians(nave['corpo']['direcao'])
     forca = fisica.cria_vetor_unitario(angulo)
     nave['corpo'] = fisica.aplica_forca(nave['corpo'], forca)
-    return nave
