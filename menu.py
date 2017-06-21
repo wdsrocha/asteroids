@@ -12,6 +12,13 @@ def titulo_jogo(tela):
     return menu_titulo
 
 
+def titulo_game_over(tela):
+    menu_fonte_titulo = pygame.font.Font("assets/fonts/bitdust1.ttf", 100)
+    menu_titulo = menu_fonte_titulo.render("G A M E   O V E R", True, (WHITE))
+    menu_titulo = tela.blit(menu_titulo, (400 - menu_titulo.get_width() // 2, 300 - menu_titulo.get_height() // 2))
+    return menu_titulo
+
+
 def menu(tela):
     menu_fonte_opcoes = pygame.font.Font("assets/fonts/bitdust1.ttf", 28)
     menu_opcoes = (
@@ -59,6 +66,8 @@ def abre_tela_inicial(tela, screen):
     return (botao_play_game, botao_high_scores, menu_opcoes, botao_high_scores_voltar)
 
 
+
+
 def menu_game(tela, screen):
     menu_ativo = True
 
@@ -101,3 +110,31 @@ def menu_game(tela, screen):
             screen.print_background(tela)
             pygame.display.update()
             menu_ativo = False
+
+def game_over(tela, screen):
+    menu_ativo = True
+
+    titulo_game_over(tela)
+
+    while menu_ativo:
+
+        for event in pygame.event.get():
+
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+
+        # posição do mouse e clique do botão
+        pos = pygame.mouse.get_pos()
+        (pressed1, pressed2, pressed3) = pygame.mouse.get_pressed()
+        # if
+
+        texto_botao_voltar = escreve_texto('NEW GAME', 28)
+
+        botao_voltar = tela.blit(escreve_texto('NEW GAME', 28),
+                                 (screen.dimensoes[0] / 2 - texto_botao_voltar.get_width() // 2, 540))
+
+        if botao_voltar.collidepoint(pos) & pressed1 == 1:
+            print("Tela Inicial")
+            screen.print_background(tela)
+            abre_tela_inicial(tela, screen)

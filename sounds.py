@@ -2,6 +2,7 @@
 
 import pygame
 
+pygame.init()
 
 def tiro_nave():
     pygame.mixer.music.load('assets/sounds/fire.wav')
@@ -41,7 +42,7 @@ def tiro_patrulha_grande():
     pygame.mixer.music.play()
 
 
-def fundo_musical():
-    pygame.mixer.pre_init(44100, 16, 2, 4096)
-    pygame.mixer.music.load('assets/sounds/beat.wav')
-    pygame.mixer.music.play(-1)
+def fundo_musical(numero):
+    pygame.mixer.music.load('assets/sounds/beat'+str(numero)+'.wav')
+    pygame.mixer.music.play()
+

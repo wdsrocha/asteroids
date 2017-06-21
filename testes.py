@@ -37,7 +37,17 @@ if __name__ == '__main__':
     pygame.display.update()
     menu.menu_game(tela, screen)
 
+    music = [0, 1]
+
     while 1:
+
+        time_based = clock.tick()
+        time_passed_seconds = time_based / 1000.0
+
+        # BG MUSIC
+        if music[0] % 25 == 0:
+            sounds.fundo_musical(music[1])
+            music[1] *= -1
 
         screen.print_background(tela)
         forca = Vector(0, 0)
@@ -74,9 +84,6 @@ if __name__ == '__main__':
         else:
             pygame.draw.polygon(nave_surface, BLACK, ((13, 17), (0, 13), (13, 9)), 1)
 
-        time_based = clock.tick()
-        time_passed_seconds = time_based / 1000.0
-
         # asteroid
         if not passos_asteroide:
             passos_asteroide = 90
@@ -108,3 +115,4 @@ if __name__ == '__main__':
 
         pygame.display.update()
         asteroid.remove_asteroide_usados()
+        music[0] += 1
