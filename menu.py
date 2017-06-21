@@ -31,7 +31,6 @@ def creditos():
     menu_fonte_creditos = pygame.font.Font("assets/fonts/bitdust1.ttf", 13)
     menu_creditos = menu_fonte_creditos.render("Pai Games Inc", True, (WHITE))
 
-
 def escreve_texto(texto, tamanho):
     texto_score = pygame.font.Font("assets/fonts/bitdust1.ttf", tamanho)
     texto_score = texto_score.render(texto, True, (WHITE))
