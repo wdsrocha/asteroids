@@ -42,10 +42,9 @@ def main():
         time_based = clock.tick()
         time_passed_seconds = time_based / 1000.0
 
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                # highscore.grava_pontos('Jusama', pontos)
+
                 pygame.quit()
                 exit()
             if event.type == pygame.KEYDOWN:
@@ -140,10 +139,8 @@ def main():
                 vidas -= 1
         asteroides += proximos_asteroides
 
-
         # Pontuação
         screen.print_tabela(pontos, vidas, tela)
-
 
         pygame.display.update()
 
