@@ -27,6 +27,8 @@ def main():
     # Pontuação e quantidade de vidas restantes do jogador
     pontos = 0
     vidas = 3
+    vidas_ganhas = 0
+    vidas_perdidas = 0
 
     screen.print_background(tela)
     pygame.display.update()
@@ -144,7 +146,6 @@ def main():
                     asteroides.remove(asteroide_atual)
                     projeteis.remove(projetil_atual)
                     pontos += pontuacao_asteroide[tamanho]
-                    vidas += (pontos % 100 == 0)
             # Se não colidiu com projétil, verifica se colidiu com
             # o jogador (nave)
             if jogador['contador'] >= 90 and screen.tem_colisao([asteroide_atual, jogador]):
@@ -155,16 +156,17 @@ def main():
                                 asteroide_atual['corpo']['posicao'],
                                 tamanho + 1))
                 pontos += pontuacao_asteroide[tamanho]
-                vidas += (pontos % 100 == 0)
                 asteroides.remove(asteroide_atual)
                 sounds.explosao_asteroide_grande()
                 origem_x = screen.dimensoes[0]/2
                 origem_y = screen.dimensoes[1]/2
                 jogador = nave.cria_nave((origem_x, origem_y))
-                vidas -= 1
+                vidas_perdidas += 1
         asteroides += proximos_asteroides
 
         # Pontuação
+        vidas_ganhas = pontos//1000
+        vidas = 3 + vidas_ganhas - vidas_perdidas
         screen.print_tabela(pontos, vidas, tela)
 
         pygame.display.update()
