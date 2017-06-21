@@ -27,7 +27,6 @@ def menu(tela):
         menu_fonte_opcoes.render("HIGH SCORES", True, (WHITE)))
     return menu_opcoes
 
-
 def creditos():
     menu_fonte_creditos = pygame.font.Font("assets/fonts/bitdust1.ttf", 13)
     menu_creditos = menu_fonte_creditos.render("Pai Games Inc", True, (WHITE))
