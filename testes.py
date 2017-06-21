@@ -9,7 +9,7 @@ def main():
     clock = pygame.time.Clock()
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
-    QUANTIDADE_ASTEROIDES = 7
+    QUANTIDADE_ASTEROIDES = 5
     DISTANCIA_MINIMA = 200
 
     # Projéteis da nave
@@ -17,6 +17,7 @@ def main():
 
     # Asteróides do espaço
     asteroides = []
+    pontuacao_asteroide = [20, 50, 100]
 
     # Instanciando um jogador (nave) no centro da tela
     jogador = nave.cria_nave((screen.dimensoes[0]/2, screen.dimensoes[1]/2))
@@ -53,9 +54,6 @@ def main():
                         jogador['corpo']['posicao'],
                         math.radians(jogador['corpo']['direcao'])))
                     sounds.tiro_nave()
-                    pontos += 1
-                    if pontos % 100 == 0:
-                        vidas += 1
 
         keys = pygame.key.get_pressed()
 
@@ -101,6 +99,9 @@ def main():
         for projetil_atual in projeteis:
             projetil.atualiza_projetil(projetil_atual)
             projetil.mostra_projetil(projetil_atual, tela)
+            # limite de distancia em que o ponto pode viajar
+            if projetil_atual['contador'] > 20:
+                projeteis.remove(projetil_atual)
 
 
         # Jogador/Nave
@@ -114,23 +115,29 @@ def main():
         # Verifica colisão
         proximos_asteroides = []
         for asteroide_atual in asteroides:
+            tamanho = asteroide_atual['tamanho']
+            # Verifica se colidiu com projétil
             for projetil_atual in projeteis:
                 if screen.tem_colisao([asteroide_atual, projetil_atual]):
-                    if asteroide_atual['tamanho'] < 2:
+                    if tamanho < 2:
                         for i in range(2):
                             proximos_asteroides.append(
                                 asteroide.cria_asteroide(
                                     asteroide_atual['corpo']['posicao'],
-                                    asteroide_atual['tamanho'] + 1))
+                                    tamanho + 1))
                     asteroides.remove(asteroide_atual)
                     projeteis.remove(projetil_atual)
+                    pontos += pontuacao_asteroide[tamanho]
+            # Se não colidiu com projétil, verifica se colidiu com
+            # o jogador (nave)
             if screen.tem_colisao([asteroide_atual, jogador]):
-                if asteroide_atual['tamanho'] < 2:
+                if tamanho < 2:
                     for i in range(2):
                         proximos_asteroides.append(
                             asteroide.cria_asteroide(
                                 asteroide_atual['corpo']['posicao'],
-                                asteroide_atual['tamanho'] + 1))
+                                tamanho + 1))
+                pontos += pontuacao_asteroide[tamanho]
                 asteroides.remove(asteroide_atual)
                 sounds.explosao_asteroide_grande()
                 origem_x = screen.dimensoes[0]/2
@@ -140,6 +147,8 @@ def main():
         asteroides += proximos_asteroides
 
         # Pontuação
+        if pontos % 100 == 0:
+            vidas += 1
         screen.print_tabela(pontos, vidas, tela)
 
         pygame.display.update()

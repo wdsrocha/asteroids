@@ -3,6 +3,8 @@ import pygame, fisica, personagens, testes
 def cria_projetil(posicao, direcao):
     projetil = {}
 
+    projetil['contador'] = 0
+
     projetil['corpo'] = fisica.cria_corpo(posicao[0], posicao[1])
     projetil['corpo']['massa'] = 0.05
     forca = fisica.cria_vetor_unitario(direcao)
@@ -15,6 +17,7 @@ def cria_projetil(posicao, direcao):
 
 
 def atualiza_projetil(projetil):
+    projetil['contador'] += 1
     projetil['corpo'] = fisica.atualiza_corpo(projetil['corpo'])
     return projetil
 
