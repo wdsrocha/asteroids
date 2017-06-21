@@ -1,6 +1,6 @@
 from pygame.math import Vector2 as Vector
 
-if __name__ == '__main__':
+def main():
     import pygame, fisica, math, personagens, random, asteroide
     import projetil, nave, screen, sounds, menu, highscore
 
@@ -146,3 +146,6 @@ if __name__ == '__main__':
             music[1] *= -1
 
         music[0] += 1
+
+if __name__ == '__main__':
+    main()
