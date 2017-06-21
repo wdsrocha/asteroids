@@ -33,6 +33,9 @@ if __name__ == '__main__':
 
     while 1:
 
+        if vidas == 0:
+            menu.game_over(tela, screen, pontos)
+
         screen.print_background(tela)
         forca = Vector(0, 0)
 
@@ -43,7 +46,6 @@ if __name__ == '__main__':
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 # highscore.grava_pontos('Jusama', pontos)
-                menu.game_over(tela, screen, pontos)
                 pygame.quit()
                 exit()
             if event.type == pygame.KEYDOWN:
@@ -69,7 +71,7 @@ if __name__ == '__main__':
         if keys[pygame.K_UP]:
             nave.ativa_propulsao(jogador)
             personagens.cria_turbina(tela, jogador['surface'])
-            sounds.turbina_nave()
+            # sounds.turbina_nave()
         else:
             pygame.draw.polygon(
                 jogador['surface'], BLACK, ((13, 17), (0, 13), (13, 9)), 1)
@@ -114,6 +116,7 @@ if __name__ == '__main__':
                 origem_x = screen.dimensoes[0]/2
                 origem_y = screen.dimensoes[1]/2
                 jogador = nave.cria_nave((origem_x, origem_y))
+                vidas -= 1
 
 
         # Pontuação
@@ -123,7 +126,7 @@ if __name__ == '__main__':
         pygame.display.update()
 
         # BG MUSIC
-        if music[0] % 25 == 0:
+        if music[0] % 15 == 0:
             sounds.fundo_musical(music[1])
             music[1] *= -1
 
