@@ -126,6 +126,13 @@ def main():
                     asteroides.remove(asteroide_atual)
                     projeteis.remove(projetil_atual)
             if screen.tem_colisao([asteroide_atual, jogador]):
+                if asteroide_atual['tamanho'] < 2:
+                    for i in range(2):
+                        proximos_asteroides.append(
+                            asteroide.cria_asteroide(
+                                asteroide_atual['corpo']['posicao'],
+                                asteroide_atual['tamanho'] + 1))
+                asteroides.remove(asteroide_atual)
                 sounds.explosao_asteroide_grande()
                 origem_x = screen.dimensoes[0]/2
                 origem_y = screen.dimensoes[1]/2
