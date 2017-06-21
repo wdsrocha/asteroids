@@ -41,7 +41,12 @@ def escreve_texto(texto, tamanho):
 
 def imprime_highscores(tela, screen):
     scores = highscore.ver_highscore()
-    for i in range(10):
+    if len(scores) > 10:
+        limit = 10
+    else:
+        limit = len(scores)
+
+    for i in range(limit):
         texto = str(scores[i][1]) + "          " + str(scores[i][2])
         score = escreve_texto(texto.upper(), 26)
         tela.blit(score,

@@ -42,7 +42,6 @@ if __name__ == '__main__':
         time_based = clock.tick()
         time_passed_seconds = time_based / 1000.0
 
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 # highscore.grava_pontos('Jusama', pontos)
@@ -118,11 +117,10 @@ if __name__ == '__main__':
                 origem_y = screen.dimensoes[1]/2
                 jogador = nave.cria_nave((origem_x, origem_y))
                 vidas -= 1
-
+                pontos += 20
 
         # Pontuação
         screen.print_tabela(pontos, vidas, tela)
-
 
         pygame.display.update()
 

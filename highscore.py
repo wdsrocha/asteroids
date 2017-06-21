@@ -30,9 +30,10 @@ def ver_highscore():
 
 # lendo os pontos
 def limpar_scores():
-    cursor.execute("""DELETE FROM highscore where score > 200""")
+    cursor.execute("""DELETE FROM highscore""")
     conn.commit()
 
 
 # limpar_scores()
-# print(ver_highscore())
+# # print(ver_highscore())
+# grava_pontos('JOESLEY', 12345)
