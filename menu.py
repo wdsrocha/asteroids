@@ -118,14 +118,14 @@ def game_over(tela, screen, pontos):
     botao_salvar = tela.blit(texto_botao_salvar,
                              (screen.dimensoes[0] / 2 - texto_botao_salvar.get_width() // 2, 440))
     screen.print_background(tela)
-    pygame.display.update()
+
 
     titulo_game_over(tela)
 
     texto_botao_voltar = escreve_texto('NEW GAME', 28)
     botao_voltar = tela.blit(escreve_texto('NEW GAME', 28),
                              (screen.dimensoes[0] / 2 - texto_botao_voltar.get_width() // 2, 540))
-    pygame.display.update()
+
 
     inp = ""
     fonte_texto_nome = pygame.font.Font("assets/fonts/bitdust1.ttf", 30)
