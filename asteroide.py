@@ -30,8 +30,8 @@ def cria_asteroide(posicao, tamanho):
     asteroide_escolhido = asteroides[random.randint(0, 2)]
     pygame.draw.polygon(
         asteroide['surface'], WHITE, asteroide_escolhido, 1)
-    pygame.transform.scale(
-        asteroide['surface'], dimensao[tamanho], asteroide['surface'])
+    asteroide['surface'] = pygame.transform.scale(
+        asteroide['surface'], dimensao[tamanho])
 
     return asteroide
 
