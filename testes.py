@@ -52,6 +52,7 @@ def main():
             y = random.randint(0, screen.dimensoes[1])
             print(x, y)
             jogador = nave.cria_nave((x, y))
+            jogador['contador'] = 90
             tempo_de_espera = 0
 
         for event in pygame.event.get():
