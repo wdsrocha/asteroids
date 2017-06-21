@@ -3,6 +3,7 @@ WHITE = (255, 255, 255)
 
 VELOCIDADE_DE_ROTACAO = 360 # 360 graus por segundo
 
+
 def cria_nave(posicao):
     nave = {}
 
@@ -19,13 +20,15 @@ def cria_nave(posicao):
 
     return nave
 
+
 def atualiza_nave(nave, direcao, tempo_passado):
-    nave['corpo'] = fisica.atualiza_corpo(nave['corpo'])
-    nave['corpo'] = fisica.aplica_atrito(nave['corpo'], 0.1)
+    fisica.atualiza_corpo(nave['corpo'])
+    fisica.aplica_atrito(nave['corpo'], 0.1)
 
     nave['corpo']['direcao'] += direcao*VELOCIDADE_DE_ROTACAO*tempo_passado
 
     return nave
+
 
 def mostra_nave(nave, tela):
     nave_rotacionada = pygame.transform.rotate(
@@ -39,6 +42,7 @@ def mostra_nave(nave, tela):
     t = pygame.surface.Surface((3, 3), pygame.SRCALPHA, 32).convert_alpha()
     pygame.draw.circle(t, (255,0,0), (0,0), 10, 10)
     tela.blit(t, nave['corpo']['posicao'])
+
 
 # Aplica força no corpo da nave, alterando sua aceleração
 def ativa_propulsao(nave):

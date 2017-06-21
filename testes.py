@@ -3,7 +3,7 @@ from pygame.math import Vector2 as Vector
 if __name__ == '__main__':
     import pygame, fisica, math, personagens, random, screen, sounds, menu, highscore
     import projetil, nave
-    import asteroide as asteroid
+    import asteroide
 
     pygame.init()
     tela = pygame.display.set_mode((screen.dimensoes[0], screen.dimensoes[1]))
@@ -84,11 +84,11 @@ if __name__ == '__main__':
                         candidatos.append((i, j))
             random.shuffle(candidatos)
             for i in range(QUANTIDADE_ASTEROIDES):
-                asteroides.append(asteroid.cria_asteroide(tela, candidatos[i]))
+                asteroides.append(asteroide.cria_asteroide(tela, candidatos[i]))
 
         for asteroide_atual in asteroides:
-            asteroid.atualiza_asteroide(asteroide_atual)
-            asteroid.mostra_asteroide(asteroide_atual, tela)
+            asteroide.atualiza_asteroide(asteroide_atual)
+            asteroide.mostra_asteroide(asteroide_atual, tela)
 
 
         # Projéteis
