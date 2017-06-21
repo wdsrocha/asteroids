@@ -30,15 +30,25 @@ if __name__ == '__main__':
     pygame.display.update()
     menu.menu_game(tela, screen)
 
+    music = [0, 1]
+
     while 1:
 
         screen.print_background(tela)
         forca = Vector(0, 0)
 
+        time_based = clock.tick()
+        time_passed_seconds = time_based / 1000.0
+
+        # BG MUSIC
+        if music[0] % 25 == 0:
+            sounds.fundo_musical(music[1])
+            music[1] *= -1
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                highscore.grava_pontos('Jusama', pontos)
-                print(highscore.ver_highscore())
+                # highscore.grava_pontos('Jusama', pontos)
+                menu.game_over(tela, screen, pontos)
                 pygame.quit()
                 exit()
             if event.type == pygame.KEYDOWN:
@@ -69,8 +79,7 @@ if __name__ == '__main__':
             pygame.draw.polygon(
                 jogador['surface'], BLACK, ((13, 17), (0, 13), (13, 9)), 1)
 
-        time_based = clock.tick()
-        time_passed_seconds = time_based / 1000.0
+
 
         # Asteroides
         if len(asteroides) == 0:
@@ -110,3 +119,5 @@ if __name__ == '__main__':
 
 
         pygame.display.update()
+        music[0] += 1
+
