@@ -1,4 +1,4 @@
-import pygame, random
+import pygame, random, screen
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -17,13 +17,6 @@ def cria_nave(tela, posicao):
 def cria_turbina(tela, nave_surface):
     turbina_nave = pygame.draw.polygon(nave_surface, WHITE, ((13, 17), (0, 13), (13, 9)), 1)
     return turbina_nave
-
-
-# projétil/míssil
-def cria_projetil(tela):
-    projetil = pygame.surface.Surface((2, 2), pygame.SRCALPHA, 32).convert_alpha()
-    pygame.draw.circle(projetil, WHITE, (200,300), 10, 0)
-    return projetil
 
 
 # Personagem: Asteroide

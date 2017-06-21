@@ -2,12 +2,16 @@ from pygame.math import Vector2 as Vector
 
 if __name__ == '__main__':
     import pygame, fisica, math, personagens, random, screen, sounds, menu, highscore, asteroid
+    import projetil
 
     pygame.init()
     tela = pygame.display.set_mode((screen.dimensoes[0], screen.dimensoes[1]))
     clock = pygame.time.Clock()
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
+
+    # Projéteis da nave
+    projeteis = []
 
     passos_asteroide = 90
     asteroides = []
@@ -19,6 +23,7 @@ if __name__ == '__main__':
     asteroide = asteroid.cria_arteroide(tela, (100, 100))
 
     nave = fisica.cria_corpo(screen.dimensoes[0] / 2, screen.dimensoes[1] / 2)
+    nave['massa'] = 5
 
     nave_rotation = 90
     nave_rotation_speed = 360  # Graus por segundo
@@ -43,6 +48,14 @@ if __name__ == '__main__':
                 print(highscore.ver_highscore())
                 pygame.quit()
                 exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    projeteis.append(projetil.cria_projetil(nave['posicao'], math.radians(nave_rotation)))
+                    tela.blit(projeteis[-1]['surface'], (200, 200))
+                    sounds.tiro_nave()
+                    pontos += 1
+                    if pontos % 100 == 0:
+                        vidas += 1
 
         keys = pygame.key.get_pressed()
 
@@ -62,11 +75,13 @@ if __name__ == '__main__':
         else:
             pygame.draw.polygon(nave_surface, BLACK, ((13, 17), (0, 13), (13, 9)), 1)
 
-        if keys[pygame.K_SPACE]:
-            sounds.tiro_nave()
-            pontos += 1
-            if pontos % 100 == 0:
-                vidas += 1
+        # if keys[pygame.K_SPACE]:
+        #     projeteis.append(projetil.cria_projetil(nave['posicao'], math.radians(nave_rotation)))
+        #     tela.blit(projeteis[-1]['surface'], (200, 200))
+        #     sounds.tiro_nave()
+        #     pontos += 1
+        #     if pontos % 100 == 0:
+        #         vidas += 1
 
         time_based = clock.tick()
         time_passed_seconds = time_based / 1000.0
@@ -75,14 +90,16 @@ if __name__ == '__main__':
         if not passos_asteroide:
             passos_asteroide = 90
             asteroides.append(asteroid.cria_arteroide(tela, (100, 100)))
-            # asteroides.append(asteroid.cria_arteroide(tela, (screen.dimensoes[0], screen.dimensoes[1])))
-            print('foi criado')
         else:
             passos_asteroide -= 1
 
         for i in range(len(asteroides)):
             asteroides[i] = asteroid.atualiza_asteroide(asteroides[i])
             tela.blit(asteroides[i]['surface'], asteroides[i]['corpo']['posicao'])
+
+        for i in range(len(projeteis)):
+            projeteis[i] = projetil.atualiza_projetil(projeteis[i])
+            projetil.mostra_projetil(projeteis[i], tela)
 
         # asteroid.atualiza_asteroide()
 
