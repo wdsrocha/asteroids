@@ -113,6 +113,7 @@ if __name__ == '__main__':
         # Verifica colisão
         for asteroide_atual in asteroides:
             if screen.tem_colisao([asteroide_atual, jogador]):
+                sounds.explosao_asteroide_grande()
                 origem_x = screen.dimensoes[0]/2
                 origem_y = screen.dimensoes[1]/2
                 jogador = nave.cria_nave((origem_x, origem_y))
