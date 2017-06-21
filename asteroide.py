@@ -8,6 +8,7 @@ def cria_asteroide(posicao, tamanho):
     massa_por_tamanho = [3.0, 2.0, 1.0]
     dimensao = [(90,84), (45, 42), (15, 14)]
     asteroide = {}
+    asteroide['tamanho'] = tamanho
 
     asteroide['corpo'] = fisica.cria_corpo(posicao[0], posicao[1])
     asteroide['corpo']['massa'] = massa_por_tamanho[tamanho]

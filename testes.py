@@ -74,10 +74,11 @@ if __name__ == '__main__':
             # sounds.turbina_nave()
         else:
             pygame.draw.polygon(
-                jogador['surface'], BLACK, ((13, 17), (0, 13), (13, 9)), 1)
+                jogador['surface'], BLACK, ((13, 17), (0, 13), (13, 9)), 0)
 
 
         # Asteroides
+        # Cria asteróides no começo do jogo ou ao fim de uma onda
         if len(asteroides) == 0:
             candidatos = []
             i0, j0 = jogador['corpo']['posicao']
@@ -91,6 +92,7 @@ if __name__ == '__main__':
             for i in range(QUANTIDADE_ASTEROIDES):
                 asteroides.append(asteroide.cria_asteroide(candidatos[i], 0))
 
+        # Atualiza e imprime os asteróides na tela
         for asteroide_atual in asteroides:
             asteroide.atualiza_asteroide(asteroide_atual)
             asteroide.mostra_asteroide(asteroide_atual, tela)
@@ -111,13 +113,25 @@ if __name__ == '__main__':
 
 
         # Verifica colisão
+        proximos_asteroides = []
         for asteroide_atual in asteroides:
+            for projetil_atual in projeteis:
+                if screen.tem_colisao([asteroide_atual, projetil_atual]):
+                    if asteroide_atual['tamanho'] < 2:
+                        for i in range(2):
+                            proximos_asteroides.append(
+                                asteroide.cria_asteroide(
+                                    asteroide_atual['corpo']['posicao'],
+                                    asteroide_atual['tamanho'] + 1))
+                    asteroides.remove(asteroide_atual)
+                    projeteis.remove(projetil_atual)
             if screen.tem_colisao([asteroide_atual, jogador]):
                 sounds.explosao_asteroide_grande()
                 origem_x = screen.dimensoes[0]/2
                 origem_y = screen.dimensoes[1]/2
                 jogador = nave.cria_nave((origem_x, origem_y))
                 vidas -= 1
+        asteroides += proximos_asteroides
 
 
         # Pontuação
