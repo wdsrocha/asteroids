@@ -53,8 +53,29 @@ def imprime_highscores(tela, screen):
                   (screen.dimensoes[0] / 2 - score.get_width() // 2, 160 + 30 * i))
 
 
+def imprime_creditos(tela, screen):
+    data = ['Universidade do Estado do Amazonas', 'Sistemas de Informação - 2017', 'Prof. Dr. Jucimar Jr']
+
+    alunos = ['Adham Lucas', 'Edson Barros', 'Roberta Cruz', 'Tiago Aranha', 'Vitor Simões', 'Wesley Rocha']
+
+    uea = escreve_texto(data[0].upper(), 28)
+    tela.blit(uea, (screen.dimensoes[0] / 2 - uea.get_width() // 2, 110))
+
+    si = escreve_texto(data[1].upper(), 28)
+    tela.blit(si, (screen.dimensoes[0] / 2 - si.get_width() // 2, 140))
+
+    jr = escreve_texto(data[2].upper(), 28)
+    tela.blit(jr, (screen.dimensoes[0] / 2 - jr.get_width() // 2, 180))
+
+    for i in range(len(alunos)):
+        texto = str(alunos[i])
+        aluno = escreve_texto(texto.upper(), 26)
+        tela.blit(aluno,
+                  (screen.dimensoes[0] / 2 - aluno.get_width() // 2, 260 + 30 * i))
+
 def abre_tela_inicial(tela, screen):
-    menu_opcoes = (escreve_texto("PLAY GAME", 28), escreve_texto("HIGH SCORES", 28), escreve_texto('NEW GAME', 28))
+    menu_opcoes = (escreve_texto("PLAY GAME", 28), escreve_texto("HIGH SCORES", 28), escreve_texto('NEW GAME', 28),
+                   escreve_texto('CRÉDITOS', 30))
 
     botao_high_scores_voltar = tela.blit(escreve_texto('NEW GAME', 28),
                                          (screen.dimensoes[0] / 2 - menu_opcoes[2].get_width() // 2 + 20, 540))
@@ -67,9 +88,12 @@ def abre_tela_inicial(tela, screen):
     botao_high_scores = tela.blit(menu_opcoes[1],
                                   (screen.dimensoes[0] / 2 - menu_opcoes[1].get_width() // 2, 340))
 
+    botao_creditos = tela.blit(menu_opcoes[3],
+                               (screen.dimensoes[0] / 2 - menu_opcoes[3].get_width() // 2, 380))
+
     pygame.display.update()
 
-    return (botao_play_game, botao_high_scores, menu_opcoes, botao_high_scores_voltar)
+    return (botao_play_game, botao_high_scores, menu_opcoes, botao_high_scores_voltar, botao_creditos)
 
 
 def menu_game(tela, screen):
@@ -105,8 +129,21 @@ def menu_game(tela, screen):
             imprime_highscores(tela, screen)
             pygame.display.update()
 
+        if tela_inicial[4].collidepoint(pos) & pressed1 == 1:
+            screen.print_background(tela)
+
+            tela.blit(tela_inicial[2][3],
+                      (screen.dimensoes[0] / 2 - tela_inicial[2][3].get_width() // 2, 40))
+
+            empresa = escreve_texto('PAI GAME INC.', 28)
+
+            botao_voltar = tela.blit(empresa,
+                                     (screen.dimensoes[0] / 2 - empresa.get_width() // 2, 540))
+
+            imprime_creditos(tela, screen)
+            pygame.display.update()
+
         if botao_voltar.collidepoint(pos) & pressed1 == 1:
-            print("Tela Inicial")
             screen.print_background(tela)
             abre_tela_inicial(tela, screen)
 
@@ -124,13 +161,11 @@ def game_over(tela, screen, pontos):
                              (screen.dimensoes[0] / 2 - texto_botao_salvar.get_width() // 2, 440))
     screen.print_background(tela)
 
-
     titulo_game_over(tela)
 
     texto_botao_voltar = escreve_texto('NEW GAME', 28)
     botao_voltar = tela.blit(escreve_texto('NEW GAME', 28),
                              (screen.dimensoes[0] / 2 - texto_botao_voltar.get_width() // 2, 540))
-
 
     inp = ""
     fonte_texto_nome = pygame.font.Font("assets/fonts/bitdust1.ttf", 30)
@@ -186,4 +221,4 @@ def game_over(tela, screen, pontos):
                 pygame.display.update()
 
         if botao_voltar.collidepoint(pos) & pressed1 == 1:
-            testes
+            testes.main()
