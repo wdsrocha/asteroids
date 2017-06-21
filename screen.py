@@ -48,3 +48,16 @@ def corrige_posicao(corpo):
         corpo['posicao'].y = 0
     if corpo['posicao'].y < 0:
         corpo['posicao'].y = dimensoes[1]
+
+
+def tem_colisao(objetos):
+    hitboxes = []
+    for objeto in objetos:
+        hitbox = objeto['surface'].get_rect()
+        hitbox.x = objeto['corpo']['posicao'].x
+        hitbox.y = objeto['corpo']['posicao'].y
+        hitboxes.append(hitbox)
+    for i in range(1, len(hitboxes)):
+        if hitboxes[i-1].colliderect(hitboxes[i]):
+            return True
+    return False
