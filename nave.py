@@ -39,10 +39,6 @@ def mostra_nave(nave, tela):
     screen.corrige_posicao(nave['corpo'],nave['surface'])
     tela.blit(nave_rotacionada, (origem_x, origem_y))
 
-    t = pygame.surface.Surface((3, 3), pygame.SRCALPHA, 32).convert_alpha()
-    pygame.draw.circle(t, (255,0,0), (0,0), 10, 10)
-    tela.blit(t, nave['corpo']['posicao'])
-
 
 # Aplica força no corpo da nave, alterando sua aceleração
 def ativa_propulsao(nave):
