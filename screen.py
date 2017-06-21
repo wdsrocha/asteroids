@@ -39,14 +39,14 @@ def print_tabela(pontos, vidas, tela):
 
 
 def corrige_posicao(corpo, surface):
-    x, y = surface.get_size()
-    if corpo['posicao'].x > dimensoes[0] and x < dimensoes[0]:
-        corpo['posicao'].x = 0
-    if corpo['posicao'].x < 0 and x < dimensoes[0]:
+    w, h = surface.get_size()
+    if corpo['posicao'].x > dimensoes[0]:
+        corpo['posicao'].x = -w
+    if corpo['posicao'].x + w < 0:
         corpo['posicao'].x = dimensoes[0]
-    if corpo['posicao'].y > dimensoes[1] and y < dimensoes[1]:
-        corpo['posicao'].y = 0
-    if corpo['posicao'].y < 0 and y < dimensoes[1]:
+    if corpo['posicao'].y > dimensoes[1]:
+        corpo['posicao'].y = -h
+    if corpo['posicao'].y + h < 0:
         corpo['posicao'].y = dimensoes[1]
 
 def tem_colisao(objetos):
