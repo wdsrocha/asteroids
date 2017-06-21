@@ -1,7 +1,7 @@
 import pygame, personagens
 from pygame import *
 
-dimensoes=(800,600)
+dimensoes = (800,600)
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -13,7 +13,7 @@ pygame.init()
 
 
 def criar_texto(text, tamanho):
-    basicfont = pygame.font.SysFont(None, tamanho)
+    basicfont = pygame.font.Font("assets/fonts/bitdust1.ttf", tamanho)
     texto = basicfont.render(text, True, WHITE)
     return texto
 
@@ -27,15 +27,15 @@ def print_background(tela):
 
 def print_tabela(pontos, vidas, tela):
     score = criar_texto(str(pontos), 25)
-    lifes = criar_texto((str(vidas) + ' x'), 35)
+    lifes = criar_texto((str(vidas) + ' x'), 25)
     production = criar_texto('Sistemas de Informação', 15)
     university = criar_texto('UEA - 2017', 15)
 
-    tela.blit(score, (50, 25))
-    tela.blit(lifes, (60, 45))
-    personagens.cria_nave(tela, (125, 45))
-    tela.blit(production, (350, 570))
-    tela.blit(university, (380, 585))
+    tela.blit(score, (50, 20))
+    tela.blit(lifes, (60, 55))
+    personagens.cria_nave(tela, (130, 45))
+    tela.blit(production, (300, 570))
+    tela.blit(university, (360, 585))
 
 
 def corrige_posicao(corpo):

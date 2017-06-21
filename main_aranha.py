@@ -1,22 +1,19 @@
 from pygame.math import Vector2 as Vector
 
 if __name__ == '__main__':
-    import pygame, fisica, math, personagens, random, screen, sounds, menu, highscore, asteroid
+    import pygame, fisica, math, personagens, random, screen, sounds, menu, highscore
 
     pygame.init()
     tela = pygame.display.set_mode((screen.dimensoes[0], screen.dimensoes[1]))
     clock = pygame.time.Clock()
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
-
-    passos_asteroide = 90
-    asteroides = []
+    ROTACAO = 0
+    # nave_surface = pygame.image.load('./assets/images/jogador.png')
 
     nave_surface = personagens.cria_nave(tela, (400, 200))
 
     nave_surface = pygame.transform.rotozoom(nave_surface, -90, 1)
-
-    asteroide = asteroid.cria_arteroide(tela, (100, 100))
 
     nave = fisica.cria_corpo(screen.dimensoes[0] / 2, screen.dimensoes[1] / 2)
 
@@ -29,18 +26,20 @@ if __name__ == '__main__':
     shotspeed = 1
 
     screen.print_background(tela)
-    pygame.display.update()
+
     menu.menu_game(tela, screen)
+
+    print(highscore.ver_highscore())
 
     while 1:
 
         screen.print_background(tela)
+
         forca = Vector(0, 0)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                highscore.grava_pontos('Vitor', pontos)
-                print(highscore.ver_highscore())
+                highscore.grava_pontos('Adham', pontos)
                 pygame.quit()
                 exit()
 
@@ -54,13 +53,11 @@ if __name__ == '__main__':
         if keys[pygame.K_RIGHT]:
             rotation_direction = -1.0
 
+        if keys[pygame.K_LSHIFT]:
+            nave['posicao'] = random.randint(0, screen.dimensoes[0]), random.randint(0, screen.dimensoes[1])
+
         if keys[pygame.K_UP]:
             forca += fisica.cria_vetor_unitario(math.radians(nave_rotation))
-            # faz o foguete aparecer
-            personagens.cria_turbina(tela, nave_surface)
-            sounds.turbina_nave()
-        else:
-            pygame.draw.polygon(nave_surface, BLACK, ((13, 17), (0, 13), (13, 9)), 1)
 
         if keys[pygame.K_SPACE]:
             sounds.tiro_nave()
@@ -68,23 +65,21 @@ if __name__ == '__main__':
             if pontos % 100 == 0:
                 vidas += 1
 
+            print(nave_rotation)
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                pygame.draw.polygon(nave_surface, WHITE, ((13, 17), (0, 13), (13, 9)), 1)
+                sounds.turbina_nave()
+                # teta = math.radians(nave_rotation)
+                # x = math.cos(teta)
+                # y = math.sin(teta)
+                # forca += Vector(x, -y)
+        else:
+            pygame.draw.polygon(nave_surface, BLACK, ((13, 17), (0, 13), (13, 9)), 1)
+
         time_based = clock.tick()
         time_passed_seconds = time_based / 1000.0
-
-        # asteroid
-        if not passos_asteroide:
-            passos_asteroide = 90
-            asteroides.append(asteroid.cria_arteroide(tela, (100, 100)))
-            # asteroides.append(asteroid.cria_arteroide(tela, (screen.dimensoes[0], screen.dimensoes[1])))
-            print('foi criado')
-        else:
-            passos_asteroide -= 1
-
-        for i in range(len(asteroides)):
-            asteroides[i] = asteroid.atualiza_asteroide(asteroides[i])
-            tela.blit(asteroides[i]['surface'], asteroides[i]['corpo']['posicao'])
-
-        # asteroid.atualiza_asteroide()
 
         rotated_nave = pygame.transform.rotate(nave_surface, nave_rotation)
         w, h = rotated_nave.get_size()
@@ -99,4 +94,3 @@ if __name__ == '__main__':
         screen.print_tabela(pontos, vidas, tela)
 
         pygame.display.update()
-        asteroid.remove_asteroide_usados()
