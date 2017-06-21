@@ -44,7 +44,7 @@ if __name__ == '__main__':
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                # highscore.grava_pontos('Jusama', pontos)
+
                 pygame.quit()
                 exit()
             if event.type == pygame.KEYDOWN:
