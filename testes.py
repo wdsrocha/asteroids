@@ -40,10 +40,7 @@ if __name__ == '__main__':
         time_based = clock.tick()
         time_passed_seconds = time_based / 1000.0
 
-        # BG MUSIC
-        if music[0] % 25 == 0:
-            sounds.fundo_musical(music[1])
-            music[1] *= -1
+
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -119,5 +116,11 @@ if __name__ == '__main__':
 
 
         pygame.display.update()
+
+        # BG MUSIC
+        if music[0] % 25 == 0:
+            sounds.fundo_musical(music[1])
+            music[1] *= -1
+
         music[0] += 1
 
