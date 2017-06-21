@@ -47,5 +47,5 @@ O jogo em questão é um clone do jogo Asteroids. Este é um jogo de arcade com 
 
 
 ## Interface
-    1. Inicialmente o Menu onde é mostrado a opção "Play game" e "High Socre". A primeira incia o jogo que é descrito no item 2. e a segunda mostra o máximo de pontos feitos pelos jogadores
+    1. Inicialmente o Menu onde é mostrado a opção "Play game", "High Socre" e "Creditos". A primeira incia o jogo que é descrito no item 2. e a segunda mostra o máximo de pontos feitos pelos jogadores e o terceiro mostra os nomes dos  desenvolvedores 
     2. Fundo preto representando o espaço sideral. As estrelas representadas por pontos minúscolos sobre o fundo preto. No topo à esquerda a pontuação e logo abaixo a quantidade de vidas. As personagens serão desenhadas com figuras geométricas vetoriais.
