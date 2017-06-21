@@ -1,7 +1,7 @@
 import pygame, personagens
 from pygame import *
 
-dimensoes = (800,600)
+dimensoes = (800, 600)
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -38,17 +38,16 @@ def print_tabela(pontos, vidas, tela):
     tela.blit(university, (360, 585))
 
 
-def corrige_posicao(corpo):
-    if corpo['posicao'].x > dimensoes[0]:
+def corrige_posicao(corpo, surface):
+    x, y = surface.get_size()
+    if corpo['posicao'].x > dimensoes[0] and x < dimensoes[0]:
         corpo['posicao'].x = 0
-    if corpo['posicao'].x < 0:
+    if corpo['posicao'].x < 0 and x < dimensoes[0]:
         corpo['posicao'].x = dimensoes[0]
-
-    if corpo['posicao'].y > dimensoes[1]:
+    if corpo['posicao'].y > dimensoes[1] and y < dimensoes[1]:
         corpo['posicao'].y = 0
-    if corpo['posicao'].y < 0:
+    if corpo['posicao'].y < 0 and y < dimensoes[1]:
         corpo['posicao'].y = dimensoes[1]
-
 
 def tem_colisao(objetos):
     hitboxes = []
@@ -58,6 +57,6 @@ def tem_colisao(objetos):
         hitbox.y = objeto['corpo']['posicao'].y
         hitboxes.append(hitbox)
     for i in range(1, len(hitboxes)):
-        if hitboxes[i-1].colliderect(hitboxes[i]):
+        if hitboxes[i - 1].colliderect(hitboxes[i]):
             return True
     return False

@@ -36,7 +36,7 @@ def mostra_nave(nave, tela):
     w, h = nave_rotacionada.get_size()
     origem_x = nave['corpo']['posicao'].x - w/2
     origem_y = nave['corpo']['posicao'].y - h/2
-    screen.corrige_posicao(nave['corpo'])
+    screen.corrige_posicao(nave['corpo'],nave['surface'])
     tela.blit(nave_rotacionada, (origem_x, origem_y))
 
     t = pygame.surface.Surface((3, 3), pygame.SRCALPHA, 32).convert_alpha()
