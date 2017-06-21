@@ -89,7 +89,7 @@ if __name__ == '__main__':
                         candidatos.append((i, j))
             random.shuffle(candidatos)
             for i in range(QUANTIDADE_ASTEROIDES):
-                asteroides.append(asteroide.cria_asteroide(tela, candidatos[i]))
+                asteroides.append(asteroide.cria_asteroide(candidatos[i]))
 
         for asteroide_atual in asteroides:
             asteroide.atualiza_asteroide(asteroide_atual)

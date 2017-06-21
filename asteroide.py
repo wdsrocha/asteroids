@@ -4,7 +4,7 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
 
-def cria_asteroide(tela, posicao):
+def cria_asteroide(posicao):
     asteroide = {}
 
     asteroide['corpo'] = fisica.cria_corpo(posicao[0], posicao[1])
