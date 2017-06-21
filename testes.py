@@ -108,6 +108,14 @@ if __name__ == '__main__':
         nave.mostra_nave(jogador, tela)
 
 
+        # Verifica colisão
+        for asteroide_atual in asteroides:
+            if screen.tem_colisao([asteroide_atual, jogador]):
+                origem_x = screen.dimensoes[0]/2
+                origem_y = screen.dimensoes[1]/2
+                jogador = nave.cria_nave((origem_x, origem_y))
+
+
         # Pontuação
         screen.print_tabela(pontos, vidas, tela)
 
