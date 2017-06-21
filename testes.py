@@ -42,7 +42,6 @@ def main():
             menu.game_over(tela, screen, pontos)
 
         screen.print_background(tela)
-        forca = Vector(0, 0)
 
         time_based = clock.tick()
         time_passed_seconds = time_based / 1000.0
