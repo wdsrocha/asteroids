@@ -1,32 +1,30 @@
 from pygame.math import Vector2 as Vector
 
 if __name__ == '__main__':
-    import pygame, fisica, math, personagens, random, screen, sounds, menu, highscore, asteroid
+    import pygame, fisica, math, personagens, random, screen, sounds, menu, highscore
     import projetil, nave
+    import asteroide as asteroid
 
     pygame.init()
     tela = pygame.display.set_mode((screen.dimensoes[0], screen.dimensoes[1]))
     clock = pygame.time.Clock()
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
+    QUANTIDADE_ASTEROIDES = 7
+    DISTANCIA_MINIMA = 200
 
     # Projéteis da nave
     projeteis = []
 
-    passos_asteroide = 90
+    # Asteróides do espaço
     asteroides = []
 
     # Instanciando um jogador (nave) no centro da tela
     jogador = nave.cria_nave((screen.dimensoes[0]/2, screen.dimensoes[1]/2))
 
-    nave_rotation_speed = 360  # Graus por segundo
-
-    asteroide = asteroid.cria_arteroide(tela, (100, 100))
-
+    # Pontuação e quantidade de vidas restantes do jogador
     pontos = 0
     vidas = 3
-
-    shotspeed = 1
 
     screen.print_background(tela)
     pygame.display.update()
@@ -39,7 +37,7 @@ if __name__ == '__main__':
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                highscore.grava_pontos('Vitor', pontos)
+                highscore.grava_pontos('Jusama', pontos)
                 print(highscore.ver_highscore())
                 pygame.quit()
                 exit()
@@ -51,7 +49,7 @@ if __name__ == '__main__':
                     sounds.tiro_nave()
                     pontos += 1
                     if pontos % 100 == 0:
-                        vidas += git
+                        vidas += 1
 
         keys = pygame.key.get_pressed()
 
@@ -64,8 +62,7 @@ if __name__ == '__main__':
             rotation_direction = -1.0
 
         if keys[pygame.K_UP]:
-            jogador = nave.ativa_propulsao(jogador)
-            # faz o foguete aparecer
+            nave.ativa_propulsao(jogador)
             personagens.cria_turbina(tela, jogador['surface'])
             sounds.turbina_nave()
         else:
@@ -75,28 +72,41 @@ if __name__ == '__main__':
         time_based = clock.tick()
         time_passed_seconds = time_based / 1000.0
 
-        # asteroid
-        if not passos_asteroide:
-            passos_asteroide = 90
-            asteroides.append(asteroid.cria_arteroide(tela, (100, 100)))
-        else:
-            passos_asteroide -= 1
+        # Asteroides
+        if len(asteroides) == 0:
+            candidatos = []
+            i0, j0 = jogador['corpo']['posicao']
+            for i in range(screen.dimensoes[0]):
+                for j in range(screen.dimensoes[1]):
+                    # Se o pixel está à uma certa distância da
+                    # nave, ele é um candidato à conter um asteroide
+                    if abs(i0-i) + abs(j0-j) > DISTANCIA_MINIMA:
+                        candidatos.append((i, j))
+            random.shuffle(candidatos)
+            for i in range(QUANTIDADE_ASTEROIDES):
+                asteroides.append(asteroid.cria_asteroide(tela, candidatos[i]))
 
         for asteroide_atual in asteroides:
             asteroid.atualiza_asteroide(asteroide_atual)
-            tela.blit(asteroide_atual['surface'], asteroide_atual['corpo']['posicao'])
+            asteroid.mostra_asteroide(asteroide_atual, tela)
 
+
+        # Projéteis
         for projetil_atual in projeteis:
             projetil.atualiza_projetil(projetil_atual)
             projetil.mostra_projetil(projetil_atual, tela)
 
-        screen.print_tabela(pontos, vidas, tela)
 
+        # Jogador/Nave
         nave.atualiza_nave(
             jogador,
             rotation_direction,
             time_passed_seconds)
         nave.mostra_nave(jogador, tela)
 
+
+        # Pontuação
+        screen.print_tabela(pontos, vidas, tela)
+
+
         pygame.display.update()
-        asteroid.remove_asteroide_usados()
