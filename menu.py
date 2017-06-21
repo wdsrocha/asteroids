@@ -5,24 +5,24 @@ WHITE = (255, 255, 255)
 # menu
 
 def titulo_jogo(tela):
-    menu_fonte_titulo = pygame.font.Font("assets/fonts/hyperspace/hyperspace_bold.otf", 92)
+    menu_fonte_titulo = pygame.font.Font("assets/fonts/bitdust1.ttf", 100)
     menu_titulo = menu_fonte_titulo.render("ASTEROIDS", True, (WHITE))
     menu_titulo = tela.blit(menu_titulo, (400 - menu_titulo.get_width() // 2, 150 - menu_titulo.get_height() // 2))
     return menu_titulo
 
 def menu(tela):
-    menu_fonte_opcoes = pygame.font.Font("assets/fonts/hyperspace/hyperspace_bold.otf", 28)
+    menu_fonte_opcoes = pygame.font.Font("assets/fonts/bitdust1.ttf", 28)
     menu_opcoes = (
         menu_fonte_opcoes.render("PLAY GAME", True, (WHITE)),
         menu_fonte_opcoes.render("HIGH SCORES", True, (WHITE)))
     return menu_opcoes
 
 def creditos():
-    menu_fonte_creditos = pygame.font.Font("assets/fonts/hyperspace/hyperspace_bold.otf", 13)
+    menu_fonte_creditos = pygame.font.Font("assets/fonts/bitdust1.ttf", 13)
     menu_creditos = menu_fonte_creditos.render("Pai Games Inc", True, (WHITE))
 
 def score():
-    menu_fonte_creditos = pygame.font.Font("assets/fonts/hyperspace/hyperspace_bold.otf", 13)
+    menu_fonte_creditos = pygame.font.Font("assets/fonts/bitdust1.ttf", 13)
     menu_creditos = menu_fonte_creditos.render("Pai Games Inc", True, (WHITE))
 
 
