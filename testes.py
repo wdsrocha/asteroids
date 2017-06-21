@@ -1,9 +1,8 @@
 from pygame.math import Vector2 as Vector
 
 if __name__ == '__main__':
-    import pygame, fisica, math, personagens, random, screen, sounds, menu, highscore
-    import projetil, nave
-    import asteroide
+    import pygame, fisica, math, personagens, random, asteroide
+    import projetil, nave, screen, sounds, menu, highscore
 
     pygame.init()
     tela = pygame.display.set_mode((screen.dimensoes[0], screen.dimensoes[1]))
@@ -41,7 +40,6 @@ if __name__ == '__main__':
         time_passed_seconds = time_based / 1000.0
 
 
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 # highscore.grava_pontos('Jusama', pontos)
@@ -75,7 +73,6 @@ if __name__ == '__main__':
         else:
             pygame.draw.polygon(
                 jogador['surface'], BLACK, ((13, 17), (0, 13), (13, 9)), 1)
-
 
 
         # Asteroides
@@ -123,4 +120,3 @@ if __name__ == '__main__':
             music[1] *= -1
 
         music[0] += 1
-
