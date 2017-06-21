@@ -17,6 +17,7 @@ O jogo em questão é um clone do jogo Asteroids. Este é um jogo de arcade com 
 
 ## Gameplay
 
+
 ## Personagens
 
     1. Nave Espacial
@@ -35,9 +36,11 @@ O jogo em questão é um clone do jogo Asteroids. Este é um jogo de arcade com 
     3. A nave atira misseis caso a tecla barra de espaços seja acionada. Caso a tecla se mantenha acionada, a nave atira sequencialmente misseis até que a tecla deixe de ser pressionada.
 
 ## Câmera
-
+   1. O jogo é mostrado em 2D, sendo o universo ao fundo e a nave vista de cima bem como os asteroides e as patrulhas. O jogo apresenta um efeito circular nas bordas, ou seja, quando a nave atravessa uma das bordas ela reaparece na borda paralela na mesma em direção que sumiu.
+   
 ## Universo do Jogo
-
+    1. O jogo se passa no espaço sideral. 
+    
 ## Inimigos
 
     1. Patrulha (Disco voador) Maior
@@ -48,5 +51,5 @@ O jogo em questão é um clone do jogo Asteroids. Este é um jogo de arcade com 
 
 
 ## Interface
-
-    Fundo preto representando o espaço sideral. No topo à esquerda a pontuação e logo abaixo a quantidade de vidas. As personagens serão desenhadas com figuras geométricas vetoriais.
+    1. Inicialmente o Menu onde é mostrado a opção "Play game" e "High Socre". A primeira incia o jogo que é descrito no item 2.       e a segunda mostra o máximo de pontos feitos pelos jogadores
+    2. Fundo preto representando o espaço sideral. As estrelas representadas por pontos minúscolos sobre o fundo preto. No topo à esquerda a pontuação e logo abaixo a quantidade de vidas. As personagens serão desenhadas com figuras geométricas vetoriais.
